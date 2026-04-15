@@ -320,17 +320,45 @@ body{
 <div id="detail-rsvp" class="detail-modal">
   <div class="detail-content">
     <button class="detail-close" onclick="closeDetail()">&times;</button>
+
     <div class="detail-grid">
+
       <div class="detail-img">
         <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800">
       </div>
+
       <div>
+
         <span class="d-eyebrow">02 — RSVP</span>
         <h2 class="d-title">Conferma la tua <em>presenza</em></h2>
         <div class="d-rule"></div>
-        <p class="d-body">Facci sapere se sarai con noi in questo giorno speciale.</p>
-        <a class="d-btn" href="https://forms.gle/d1rprK9nJ4YJKm2C9" target="_blank">Conferma</a>
+
+        <p class="d-body">Compila il modulo per farci sapere se sarai con noi 💍</p>
+
+        <!-- FORM -->
+        <form id="rsvpForm">
+          
+          <input type="text" name="name" placeholder="Nome e Cognome" required style="width:100%;padding:0.8rem;margin-bottom:0.8rem;border:1px solid #ddd;border-radius:6px;">
+
+          <select name="attendance" required style="width:100%;padding:0.8rem;margin-bottom:0.8rem;border:1px solid #ddd;border-radius:6px;">
+            <option value="">Parteciperai?</option>
+            <option value="yes">Sì, sarò presente</option>
+            <option value="no">No, non potrò esserci</option>
+          </select>
+
+          <input type="number" name="guests" placeholder="Numero invitati (es. 2)" min="1" style="width:100%;padding:0.8rem;margin-bottom:1rem;border:1px solid #ddd;border-radius:6px;">
+
+          <button type="submit" class="d-btn">Invia RSVP</button>
+
+        </form>
+
+        <!-- SUCCESS -->
+        <div id="rsvpSuccess" style="display:none;margin-top:1rem;color:#2e7d32;font-weight:500;">
+          ✔ RSVP inviato con successo. Grazie!
+        </div>
+
       </div>
+
     </div>
   </div>
 </div>
@@ -372,6 +400,31 @@ track.addEventListener('scroll',()=>{
   const index = Math.round(track.scrollLeft / window.innerWidth);
   dots.forEach((d,i)=>d.classList.toggle('active', i===index));
 });
+
+document.getElementById('rsvpForm')?.addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const form = e.target;
+  const data = {
+    name: form.name.value,
+    attendance: form.attendance.value,
+    guests: form.guests.value
+  };
+
+  // simulazione invio (puoi collegarlo a Google Sheets o backend dopo)
+  form.style.opacity = '0.4';
+
+  setTimeout(() => {
+    form.style.display = 'none';
+    document.getElementById('rsvpSuccess').style.display = 'block';
+  }, 800);
+
+  fetch("https://script.google.com/macros/s/AKfycbxpZmd9DjE7w4oK3xgK4D567nuzKVcDFdCDsbmxskuB1E8xKNCSjnYG89Xo6A3VtniA/exec", {
+  method: "POST",
+  body: JSON.stringify(data)
+});
+});
+  
 </script>
 
 </body>
