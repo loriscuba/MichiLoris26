@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Michela & Loris — 29 Agosto 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,51 +18,46 @@ body{
 }
 
 /* HEADER */
-.site-header{
+header{
   position:fixed;
   top:0;
   width:100%;
   text-align:center;
-  padding:1.2rem 1rem;
+  padding:1rem;
   z-index:10;
-  background:rgba(232,224,208,0.85);
-  backdrop-filter: blur(8px);
+  background:rgba(232,224,208,0.75);
+  backdrop-filter:blur(10px);
 }
 
-.site-title{
+h1{
   font-family:'Cormorant',serif;
+  font-weight:300;
   font-size:2.2rem;
-  letter-spacing:-0.02em;
 }
 
-.site-title em{color:#c4583a;}
+h1 em{color:#c4583a;}
 
-.site-date{
-  font-size:0.6rem;
-  letter-spacing:0.35em;
-  opacity:0.6;
+.subtitle{
+  font-size:.6rem;
+  letter-spacing:.3em;
+  opacity:.6;
 }
 
 /* CAROUSEL */
-.pol-stack{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
+.wrapper{height:100vh;}
 
-.pol-track{
-  display:flex;
+.track{
   height:100%;
+  display:flex;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 }
 
-.pol-track::-webkit-scrollbar{display:none;}
+.track::-webkit-scrollbar{display:none;}
 
-.pol-slide{
+.slide{
   min-width:100%;
   height:100%;
   scroll-snap-align:center;
@@ -70,49 +65,45 @@ body{
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  gap:1.2rem;
+  gap:1rem;
 }
 
-.pol-item{
-  width:78vw;
-  max-width:360px;
-  height:62vh;
+/* POLAROID */
+.card{
+  width:80vw;
+  max-width:380px;
+  height:60vh;
   border:14px solid #fff;
   border-bottom:55px solid #fff;
-  box-shadow:0 30px 80px rgba(0,0,0,0.18);
-  cursor:pointer;
-  overflow:hidden;
   background:#fff;
-  transform:rotate(-1deg);
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,0.15);
+  cursor:pointer;
   transition:.3s;
 }
 
-.pol-slide:nth-child(2) .pol-item{transform:rotate(1.5deg);}
-.pol-slide:nth-child(3) .pol-item{transform:rotate(-1.2deg);}
+.card:hover{transform:scale(1.03);}
 
-.pol-item:hover{
-  transform:scale(1.03) rotate(0deg);
-}
-
-.pol-item img{
+.card img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.pol-label{
+.label{
   font-family:'Cormorant',serif;
-  font-size:1.6rem;
+  font-size:1.5rem;
 }
 
 /* DOTS */
 .dots{
   position:fixed;
-  bottom:22px;
+  bottom:18px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:8px;
+  gap:10px;
+  z-index:50;
 }
 
 .dot{
@@ -121,95 +112,98 @@ body{
   border-radius:50%;
   background:#b8b0a4;
   opacity:.4;
+  transition:.25s;
 }
 
 .dot.active{
-  background:#c4583a;
   opacity:1;
+  background:#c4583a;
+  transform:scale(1.25);
 }
 
 /* MODAL */
-.detail-modal{
+.modal{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.6);
+
   opacity:0;
+  visibility:hidden;
   pointer-events:none;
-  transition:.3s;
+  transition:.3s ease;
+  z-index:999;
 }
 
-.detail-modal.open{
+.modal.open{
   opacity:1;
+  visibility:visible;
   pointer-events:auto;
 }
 
-.detail-content{
+.modal-content{
   width:92%;
-  max-width:920px;
+  max-width:900px;
   background:#f3eadc;
   border-radius:18px;
-  padding:2.5rem;
+  padding:2rem;
   position:relative;
+  transform:scale(.95);
+  transition:.3s ease;
 }
 
-.detail-close{
+.modal.open .modal-content{
+  transform:scale(1);
+}
+
+.close{
   position:absolute;
-  top:18px;
-  right:18px;
+  top:10px;
+  right:15px;
   font-size:2rem;
   border:none;
   background:none;
   cursor:pointer;
 }
 
-.detail-grid{
+/* GRID */
+.grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:2rem;
+  align-items:center;
 }
 
-.detail-img img{
+.img img{
   width:100%;
   border-radius:12px;
 }
 
-.d-eyebrow{
+/* TEXT */
+.eyebrow{
   font-size:.6rem;
-  letter-spacing:.35em;
+  letter-spacing:.3em;
   color:#c4583a;
 }
 
-.d-title{
+.title{
   font-family:'Cormorant',serif;
-  font-size:2.2rem;
-  margin:.8rem 0;
+  font-size:2rem;
+  margin:.5rem 0;
 }
 
-.d-rule{
+.rule{
   width:40px;
   height:2px;
   background:#c4583a;
   margin-bottom:1rem;
 }
 
-.d-body{
-  font-size:.92rem;
+.text{
+  font-size:.9rem;
   line-height:1.6;
-  margin-bottom:1rem;
-}
-
-.d-btn{
-  padding:.9rem 1.4rem;
-  background:#c4583a;
-  color:#fff;
-  border:none;
-  text-decoration:none;
-  display:inline-block;
-  font-size:.7rem;
-  letter-spacing:.2em;
 }
 
 /* FORM */
@@ -219,48 +213,59 @@ input,select,textarea{
   margin-bottom:10px;
   border:1px solid #ddd;
   border-radius:6px;
-  font-family:inherit;
 }
 
-textarea{min-height:80px;}
+button{
+  background:#c4583a;
+  color:#fff;
+  border:none;
+  padding:.8rem 1.2rem;
+  cursor:pointer;
+  letter-spacing:.2em;
+}
 
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <h1 class="site-title">Michela <em>&</em> Loris</h1>
-  <div class="site-date">29 · 08 · 2026</div>
+<header>
+  <h1>Michela <em>&</em> Loris</h1>
+  <div class="subtitle">29 · 08 · 2026</div>
 </header>
 
-<main class="pol-stack">
-  <div class="pol-track" id="track">
+<!-- CAROUSEL -->
+<div class="wrapper">
+  <div class="track" id="track">
 
-    <section class="pol-slide">
-      <div class="pol-item" onclick="openDetail('location')">
-        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1000">
+    <div class="slide">
+      <div class="card" onclick="openModal('location')">
+        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200">
       </div>
-      <div class="pol-label">Location</div>
-    </section>
+      <div class="label">Location</div>
+    </div>
 
-    <section class="pol-slide">
-      <div class="pol-item" onclick="openDetail('rsvp')">
-        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=1000">
+    <div class="slide">
+      <div class="card" onclick="openModal('rsvp')">
+        <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=1200">
       </div>
-      <div class="pol-label">RSVP</div>
-    </section>
+      <div class="label">RSVP</div>
+    </div>
 
-    <section class="pol-slide">
-      <div class="pol-item" onclick="openDetail('gift')">
-        <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1000">
+    <div class="slide">
+      <div class="card" onclick="openModal('gift')">
+        <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=1200">
       </div>
-      <div class="pol-label">Regalo</div>
-    </section>
+      <div class="label">Regalo</div>
+    </div>
 
   </div>
-</main>
+</div>
 
+<!-- DOTS -->
 <div class="dots">
   <div class="dot active"></div>
   <div class="dot"></div>
@@ -268,63 +273,55 @@ textarea{min-height:80px;}
 </div>
 
 <!-- LOCATION -->
-<div id="detail-location" class="detail-modal">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail()">&times;</button>
-    <div class="detail-grid">
-      <div class="detail-img">
+<div id="modal-location" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="grid">
+      <div class="img">
         <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800">
       </div>
       <div>
-        <span class="d-eyebrow">Location</span>
-        <h2 class="d-title">Agriturismo Ca di Voi</h2>
-        <div class="d-rule"></div>
-        <p class="d-body">Il nostro giorno speciale.</p>
-        <a class="d-btn" href="https://maps.google.com" target="_blank">Maps</a>
+        <div class="eyebrow">Location</div>
+        <h2 class="title">Ca di Voi</h2>
+        <div class="rule"></div>
+        <div class="text">Agriturismo immerso nella natura.</div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- RSVP -->
-<div id="detail-rsvp" class="detail-modal">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail()">&times;</button>
+<div id="modal-rsvp" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
 
-    <div class="detail-grid">
-      <div class="detail-img">
+    <div class="grid">
+      <div class="img">
         <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800">
       </div>
 
       <div>
-        <span class="d-eyebrow">RSVP</span>
-        <h2 class="d-title">Conferma presenza</h2>
-        <div class="d-rule"></div>
+        <div class="eyebrow">RSVP</div>
+        <h2 class="title">Conferma presenza</h2>
+        <div class="rule"></div>
 
         <form id="rsvpForm">
-
-          <input name="name" type="text" placeholder="Nome e Cognome" required>
-
-          <select name="attendance" required>
+          <input name="name" placeholder="Nome e Cognome" required>
+          <select name="attendance">
             <option value="">Parteciperai?</option>
             <option>Sì</option>
             <option>No</option>
           </select>
-
           <input name="allergies" placeholder="Allergie">
-
           <input name="song" placeholder="Canzone">
-
           <input name="car" placeholder="Auto / passaggi">
+          <textarea name="questions" placeholder="Note"></textarea>
 
-          <textarea name="questions" placeholder="Domande"></textarea>
-
-          <button class="d-btn" type="submit">Invia RSVP</button>
-
+          <button type="submit">Invia</button>
         </form>
 
-        <div id="rsvpSuccess" style="display:none;margin-top:10px;color:green;">
-          ✔ RSVP inviato
+        <div id="success" style="display:none;color:green;margin-top:10px;">
+          ✔ Inviato con successo
         </div>
 
       </div>
@@ -333,57 +330,52 @@ textarea{min-height:80px;}
 </div>
 
 <!-- GIFT -->
-<div id="detail-gift" class="detail-modal">
-  <div class="detail-content">
-    <button class="detail-close" onclick="closeDetail()">&times;</button>
-    <div class="detail-grid">
-      <div class="detail-img">
+<div id="modal-gift" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="grid">
+      <div class="img">
         <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800">
       </div>
       <div>
-        <span class="d-eyebrow">Regalo</span>
-        <h2 class="d-title">Viaggio di nozze</h2>
-        <div class="d-rule"></div>
-        <p class="d-body">IBAN: IT60 X054...</p>
+        <div class="eyebrow">Regalo</div>
+        <h2 class="title">Viaggio di nozze</h2>
+        <div class="rule"></div>
+        <div class="text">IBAN: IT60 X054 ...</div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-function openDetail(id){
-  const modal = document.getElementById("detail-" + id);
-  if(!modal) return;
+const track = document.getElementById("track");
+const dots = document.querySelectorAll(".dot");
 
-  modal.classList.add("open");
-  document.body.style.overflow = "hidden";
+function openModal(id){
+  document.getElementById("modal-"+id).classList.add("open");
+  document.body.style.overflow="hidden";
 }
 
-function closeDetail(){
-  document.querySelectorAll(".detail-modal").forEach(m => {
-    m.classList.remove("open");
-  });
-
-  document.body.style.overflow = "";
+function closeModal(){
+  document.querySelectorAll(".modal").forEach(m=>m.classList.remove("open"));
+  document.body.style.overflow="";
 }
 
-/* CLICK FUORI PER CHIUDERE */
-document.querySelectorAll(".detail-modal").forEach(modal => {
-  modal.addEventListener("click", (e) => {
-    if(e.target === modal){
-      closeDetail();
-    }
+/* CLOSE BACKDROP */
+document.querySelectorAll(".modal").forEach(m=>{
+  m.addEventListener("click",e=>{
+    if(e.target===m) closeModal();
   });
 });
 
-/* ESC KEY */
-document.addEventListener("keydown", (e) => {
-  if(e.key === "Escape") closeDetail();
+/* DOT SYNC */
+track.addEventListener("scroll",()=>{
+  const index = Math.round(track.scrollLeft / window.innerWidth);
+  dots.forEach((d,i)=>d.classList.toggle("active",i===index));
 });
 
-
-/* RSVP */
-document.getElementById('rsvpForm')?.addEventListener('submit', async function(e){
+/* RSVP FIX */
+document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
   const form = e.target;
@@ -397,28 +389,17 @@ document.getElementById('rsvpForm')?.addEventListener('submit', async function(e
     questions: form.questions.value
   };
 
-  const btn = form.querySelector("button");
-  btn.disabled = true;
-  btn.innerText = "Invio...";
-
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwCz6X2_HSCjMjKXJ4eC39vvYBEwzUjkhm2N0HMJiAtxANK87kfSqrUCfeWb1Y-ny79/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams(data)
+  try{
+    await fetch("https://script.google.com/macros/s/AKfycbwCz6X2_HSCjMjKXJ4eC39vvYBEwzUjkhm2N0HMJiAtxANK87kfSqrUCfeWb1Y-ny79/exec",{
+      method:"POST",
+      body:new URLSearchParams(data)
     });
 
-    if(!res.ok) throw new Error();
+    form.style.display="none";
+    document.getElementById("success").style.display="block";
 
-    form.style.display = "none";
-    document.getElementById("rsvpSuccess").style.display = "block";
-
-  } catch(err){
-    btn.disabled = false;
-    btn.innerText = "Invia RSVP";
-    alert("Errore invio RSVP");
+  }catch(err){
+    alert("Errore invio");
   }
 });
 </script>
