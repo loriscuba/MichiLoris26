@@ -43,7 +43,7 @@ body{
   opacity:0.6;
 }
 
-/* ===== CAROUSEL ===== */
+/* CAROUSEL */
 .pol-stack{
   height:100vh;
   display:flex;
@@ -60,7 +60,6 @@ body{
   -webkit-overflow-scrolling: touch;
 }
 
-/* hide scrollbar */
 .pol-track::-webkit-scrollbar{display:none;}
 
 .pol-slide{
@@ -70,27 +69,22 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
   flex-direction:column;
   gap:1.2rem;
 }
 
-/* POLAROID PREMIUM */
 .pol-item{
   width:78vw;
   max-width:360px;
   height:62vh;
   border:14px solid #fff;
   border-bottom:55px solid #fff;
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.18),
-    0 10px 25px rgba(0,0,0,0.12);
+  box-shadow:0 30px 80px rgba(0,0,0,0.18);
   cursor:pointer;
   overflow:hidden;
-  transform: rotate(-1deg);
-  transition: all 0.35s ease;
-  border-radius:2px;
   background:#fff;
+  transform:rotate(-1deg);
+  transition:.3s;
 }
 
 .pol-slide:nth-child(2) .pol-item{transform:rotate(1.5deg);}
@@ -98,7 +92,6 @@ body{
 
 .pol-item:hover{
   transform:scale(1.03) rotate(0deg);
-  box-shadow:0 40px 90px rgba(0,0,0,0.22);
 }
 
 .pol-item img{
@@ -107,14 +100,12 @@ body{
   object-fit:cover;
 }
 
-/* LABEL */
 .pol-label{
   font-family:'Cormorant',serif;
   font-size:1.6rem;
-  letter-spacing:-0.01em;
 }
 
-/* DOT NAV */
+/* DOTS */
 .dots{
   position:fixed;
   bottom:22px;
@@ -122,7 +113,6 @@ body{
   transform:translateX(-50%);
   display:flex;
   gap:8px;
-  z-index:20;
 }
 
 .dot{
@@ -130,17 +120,15 @@ body{
   height:7px;
   border-radius:50%;
   background:#b8b0a4;
-  opacity:0.4;
-  transition:all .3s ease;
+  opacity:.4;
 }
 
 .dot.active{
-  opacity:1;
   background:#c4583a;
-  transform:scale(1.2);
+  opacity:1;
 }
 
-/* ===== MODAL PREMIUM ===== */
+/* MODAL */
 .detail-modal{
   position:fixed;
   inset:0;
@@ -150,8 +138,7 @@ body{
   background:rgba(0,0,0,0.65);
   opacity:0;
   pointer-events:none;
-  transition:opacity .35s ease;
-  z-index:1000;
+  transition:.3s;
 }
 
 .detail-modal.open{
@@ -165,15 +152,7 @@ body{
   background:#f3eadc;
   border-radius:18px;
   padding:2.5rem;
-  transform:scale(0.92);
-  opacity:0;
-  transition:all .35s ease;
-  box-shadow:0 30px 80px rgba(0,0,0,0.25);
-}
-
-.detail-modal.open .detail-content{
-  transform:scale(1);
-  opacity:1;
+  position:relative;
 }
 
 .detail-close{
@@ -184,15 +163,12 @@ body{
   border:none;
   background:none;
   cursor:pointer;
-  opacity:0.5;
 }
 
-/* GRID */
 .detail-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:2.5rem;
-  align-items:center;
+  gap:2rem;
 }
 
 .detail-img img{
@@ -200,59 +176,54 @@ body{
   border-radius:12px;
 }
 
-/* TEXT */
 .d-eyebrow{
-  font-size:0.6rem;
-  letter-spacing:0.35em;
-  text-transform:uppercase;
+  font-size:.6rem;
+  letter-spacing:.35em;
   color:#c4583a;
 }
 
 .d-title{
   font-family:'Cormorant',serif;
   font-size:2.2rem;
-  margin:0.8rem 0;
+  margin:.8rem 0;
 }
 
-.d-title em{color:#c4583a;}
-
 .d-rule{
-  width:42px;
+  width:40px;
   height:2px;
   background:#c4583a;
   margin-bottom:1rem;
 }
 
 .d-body{
-  font-size:0.92rem;
-  line-height:1.7;
-  color:#444;
-  margin-bottom:1.5rem;
+  font-size:.92rem;
+  line-height:1.6;
+  margin-bottom:1rem;
 }
 
-/* BUTTON */
 .d-btn{
-  display:inline-block;
-  padding:0.9rem 1.6rem;
+  padding:.9rem 1.4rem;
   background:#c4583a;
   color:#fff;
+  border:none;
   text-decoration:none;
-  font-size:0.7rem;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
+  display:inline-block;
+  font-size:.7rem;
+  letter-spacing:.2em;
+}
+
+/* FORM */
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border:1px solid #ddd;
   border-radius:6px;
-  transition:0.2s;
+  font-family:inherit;
 }
 
-.d-btn:hover{
-  background:#a8452e;
-}
+textarea{min-height:80px;}
 
-/* MOBILE */
-@media(max-width:768px){
-  .detail-grid{grid-template-columns:1fr;}
-  .pol-item{height:58vh;}
-}
 </style>
 </head>
 
@@ -290,14 +261,13 @@ body{
   </div>
 </main>
 
-<!-- DOTS -->
 <div class="dots">
   <div class="dot active"></div>
   <div class="dot"></div>
   <div class="dot"></div>
 </div>
 
-<!-- MODAL LOCATION -->
+<!-- LOCATION -->
 <div id="detail-location" class="detail-modal">
   <div class="detail-content">
     <button class="detail-close" onclick="closeDetail()">&times;</button>
@@ -306,64 +276,63 @@ body{
         <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800">
       </div>
       <div>
-        <span class="d-eyebrow">01 — Location</span>
-        <h2 class="d-title">Agriturismo <em>Ca di Voi</em></h2>
+        <span class="d-eyebrow">Location</span>
+        <h2 class="d-title">Agriturismo Ca di Voi</h2>
         <div class="d-rule"></div>
-        <p class="d-body">Un luogo immerso nella natura dove celebreremo il nostro giorno speciale.</p>
-        <a class="d-btn" href="https://maps.google.com" target="_blank">Apri Maps</a>
+        <p class="d-body">Il nostro giorno speciale.</p>
+        <a class="d-btn" href="https://maps.google.com" target="_blank">Maps</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- MODAL RSVP -->
+<!-- RSVP -->
 <div id="detail-rsvp" class="detail-modal">
   <div class="detail-content">
     <button class="detail-close" onclick="closeDetail()">&times;</button>
 
     <div class="detail-grid">
-
       <div class="detail-img">
         <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800">
       </div>
 
       <div>
-
-        <span class="d-eyebrow">02 — RSVP</span>
-        <h2 class="d-title">Conferma la tua <em>presenza</em></h2>
+        <span class="d-eyebrow">RSVP</span>
+        <h2 class="d-title">Conferma presenza</h2>
         <div class="d-rule"></div>
 
-        <p class="d-body">Compila il modulo per farci sapere se sarai con noi 💍</p>
-
-        <!-- FORM -->
         <form id="rsvpForm">
-          
-          <input type="text" name="name" placeholder="Nome e Cognome" required style="width:100%;padding:0.8rem;margin-bottom:0.8rem;border:1px solid #ddd;border-radius:6px;">
 
-          <select name="attendance" required style="width:100%;padding:0.8rem;margin-bottom:0.8rem;border:1px solid #ddd;border-radius:6px;">
+          <input name="name" type="text" placeholder="Nome e Cognome" required>
+
+          <select name="attendance" required>
             <option value="">Parteciperai?</option>
-            <option value="yes">Sì, sarò presente</option>
-            <option value="no">No, non potrò esserci</option>
+            <option>Sì</option>
+            <option>No</option>
           </select>
 
-          <input type="number" name="guests" placeholder="Numero invitati (es. 2)" min="1" style="width:100%;padding:0.8rem;margin-bottom:1rem;border:1px solid #ddd;border-radius:6px;">
+          <input name="allergies" placeholder="Allergie">
 
-          <button type="submit" class="d-btn">Invia RSVP</button>
+          <input name="song" placeholder="Canzone">
+
+          <input name="car" placeholder="Auto / passaggi">
+
+          <textarea name="questions" placeholder="Domande"></textarea>
+
+          <button class="d-btn" type="submit">Invia RSVP</button>
 
         </form>
 
-        <!-- SUCCESS -->
-        <div id="rsvpSuccess" style="display:none;margin-top:1rem;color:#2e7d32;font-weight:500;">
-          ✔ RSVP inviato con successo. Grazie!
+        <div id="rsvpSuccess" style="display:none;margin-top:10px;color:green;">
+          ✔ RSVP inviato
         </div>
 
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- MODAL GIFT -->
+<!-- GIFT -->
 <div id="detail-gift" class="detail-modal">
   <div class="detail-content">
     <button class="detail-close" onclick="closeDetail()">&times;</button>
@@ -372,21 +341,16 @@ body{
         <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=800">
       </div>
       <div>
-        <span class="d-eyebrow">03 — Regalo</span>
-        <h2 class="d-title">Un pensiero per il nostro <em>viaggio</em></h2>
+        <span class="d-eyebrow">Regalo</span>
+        <h2 class="d-title">Viaggio di nozze</h2>
         <div class="d-rule"></div>
-        <p class="d-body">
-          IBAN: IT60 X054 2811 1010 0000 0123 456
-        </p>
+        <p class="d-body">IBAN: IT60 X054...</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const dots = document.querySelectorAll('.dot');
-const track = document.getElementById('track');
-
 function openDetail(id){
   document.getElementById('detail-'+id).classList.add('open');
 }
@@ -395,36 +359,45 @@ function closeDetail(){
   document.querySelectorAll('.detail-modal').forEach(m=>m.classList.remove('open'));
 }
 
-/* DOT UPDATE */
-track.addEventListener('scroll',()=>{
-  const index = Math.round(track.scrollLeft / window.innerWidth);
-  dots.forEach((d,i)=>d.classList.toggle('active', i===index));
-});
-
-document.getElementById('rsvpForm')?.addEventListener('submit', function(e){
+/* RSVP FIXED */
+document.getElementById('rsvpForm')?.addEventListener('submit', async function(e){
   e.preventDefault();
 
   const form = e.target;
+
   const data = {
     name: form.name.value,
     attendance: form.attendance.value,
-    guests: form.guests.value
+    allergies: form.allergies.value,
+    song: form.song.value,
+    car: form.car.value,
+    questions: form.questions.value
   };
 
-  // simulazione invio (puoi collegarlo a Google Sheets o backend dopo)
-  form.style.opacity = '0.4';
+  const btn = form.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "Invio...";
 
-  setTimeout(() => {
-    form.style.display = 'none';
-    document.getElementById('rsvpSuccess').style.display = 'block';
-  }, 800);
+  try {
 
-  fetch("https://script.google.com/macros/s/AKfycbwCz6X2_HSCjMjKXJ4eC39vvYBEwzUjkhm2N0HMJiAtxANK87kfSqrUCfeWb1Y-ny79/exec", {
-  method: "POST",
-  body: JSON.stringify(data)
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwCz6X2_HSCjMjKXJ4eC39vvYBEwzUjkhm2N0HMJiAtxANK87kfSqrUCfeWb1Y-ny79/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+
+    if(!res.ok) throw new Error();
+
+    form.style.display = "none";
+    document.getElementById('rsvpSuccess').style.display = "block";
+
+  } catch(err){
+
+    btn.disabled = false;
+    btn.innerText = "Invia RSVP";
+    alert("Errore invio");
+  }
+
 });
-});
-  
 </script>
 
 </body>
