@@ -359,44 +359,13 @@ function closeDetail(){
   document.querySelectorAll('.detail-modal').forEach(m=>m.classList.remove('open'));
 }
 
-/* RSVP FIXED */
-document.getElementById('rsvpForm')?.addEventListener('submit', async function(e){
-  e.preventDefault();
-
-  const form = e.target;
-
-  const data = {
-    name: form.name.value,
-    attendance: form.attendance.value,
-    allergies: form.allergies.value,
-    song: form.song.value,
-    car: form.car.value,
-    questions: form.questions.value
-  };
-
-  const btn = form.querySelector("button");
-  btn.disabled = true;
-  btn.innerText = "Invio...";
-
-  try {
-
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwiKO5fu4xSDtf1Pc-nhqUjCcA6iP1ush3XS52VWtZYg42-JJGe6qvmMR8ltbQaNkMl/exec", {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
-
-    if(!res.ok) throw new Error();
-
-    form.style.display = "none";
-    document.getElementById('rsvpSuccess').style.display = "block";
-
-  } catch(err){
-
-    btn.disabled = false;
-    btn.innerText = "Invia RSVP";
-    alert("Errore invio");
-  }
-
+/* RSVP 2.0 */
+const res = await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: new URLSearchParams(data)
 });
 </script>
 
