@@ -352,20 +352,74 @@ textarea{min-height:80px;}
 
 <script>
 function openDetail(id){
-  document.getElementById('detail-'+id).classList.add('open');
+  const modal = document.getElementById("detail-" + id);
+  if(!modal) return;
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function closeDetail(){
-  document.querySelectorAll('.detail-modal').forEach(m=>m.classList.remove('open'));
+  document.querySelectorAll(".detail-modal").forEach(m => {
+    m.classList.remove("open");
+  });
+
+  document.body.style.overflow = "";
 }
 
-/* RSVP 2.0 */
-const res = await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
-  },
-  body: new URLSearchParams(data)
+/* CLICK FUORI PER CHIUDERE */
+document.querySelectorAll(".detail-modal").forEach(modal => {
+  modal.addEventListener("click", (e) => {
+    if(e.target === modal){
+      closeDetail();
+    }
+  });
+});
+
+/* ESC KEY */
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape") closeDetail();
+});
+
+
+/* RSVP */
+document.getElementById('rsvpForm')?.addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const form = e.target;
+
+  const data = {
+    name: form.name.value,
+    attendance: form.attendance.value,
+    allergies: form.allergies.value,
+    song: form.song.value,
+    car: form.car.value,
+    questions: form.questions.value
+  };
+
+  const btn = form.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "Invio...";
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwCz6X2_HSCjMjKXJ4eC39vvYBEwzUjkhm2N0HMJiAtxANK87kfSqrUCfeWb1Y-ny79/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams(data)
+    });
+
+    if(!res.ok) throw new Error();
+
+    form.style.display = "none";
+    document.getElementById("rsvpSuccess").style.display = "block";
+
+  } catch(err){
+    btn.disabled = false;
+    btn.innerText = "Invia RSVP";
+    alert("Errore invio RSVP");
+  }
 });
 </script>
 
