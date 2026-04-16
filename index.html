@@ -395,21 +395,19 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
 
   try {
     await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
-      method: "POST",
-      mode: "no-cors",
-      body: new URLSearchParams(data)
-    });
-
-    form.reset();
-    form.style.display = "none";
-    document.getElementById("success").style.display = "block";
-
-  } catch (err) {
-    console.error(err);
-    alert("Errore invio. Riprova.");
-    btn.disabled = false;
-    btn.innerText = "Invia";
-  }
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  body: new URLSearchParams({
+    name: form.name.value,
+    attendance: form.attendance.value,
+    allergies: form.allergies.value,
+    song: form.song.value,
+    car: form.car.value,
+    questions: form.questions.value
+  })
 });
 </script>
 
