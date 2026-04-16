@@ -375,12 +375,13 @@ track.addEventListener("scroll",()=>{
 });
 
 /* RSVP FIX 2316*/
-document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
+document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.target;
 
-  const payload = {
+  // 👇 QUI CREI data (questa è la parte che ti manca)
+  const data = {
     name: form.name.value,
     attendance: form.attendance.value,
     allergies: form.allergies.value,
@@ -389,22 +390,17 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
     questions: form.questions.value
   };
 
-  try{
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
-  method: "POST",
-  mode: "no-cors",
-  body: new URLSearchParams(data)
-});
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
+      method: "POST",
+      mode: "no-cors",
+      body: new URLSearchParams(data)
+    });
 
-    const text = await res.text();
-    console.log("RISPOSTA SERVER:", text);
+    form.style.display = "none";
+    document.getElementById("success").style.display = "block";
 
-    if(!res.ok) throw new Error("Server error");
-
-    form.style.display="none";
-    document.getElementById("success").style.display="block";
-
-  }catch(err){
+  } catch (err) {
     console.error(err);
     alert("Errore invio RSVP");
   }
