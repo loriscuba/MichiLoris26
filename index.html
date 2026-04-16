@@ -374,13 +374,12 @@ track.addEventListener("scroll",()=>{
   dots.forEach((d,i)=>d.classList.toggle("active",i===index));
 });
 
-/* RSVP FIX 2316*/
+/* RSVP FIX 2341*/
 document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.target;
 
-  // 👇 QUI CREI data (questa è la parte che ti manca)
   const data = {
     name: form.name.value,
     attendance: form.attendance.value,
@@ -390,6 +389,10 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     questions: form.questions.value
   };
 
+  const btn = form.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "Invio...";
+
   try {
     await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
       method: "POST",
@@ -397,12 +400,15 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
       body: new URLSearchParams(data)
     });
 
+    form.reset();
     form.style.display = "none";
     document.getElementById("success").style.display = "block";
 
   } catch (err) {
     console.error(err);
-    alert("Errore invio RSVP");
+    alert("Errore invio. Riprova.");
+    btn.disabled = false;
+    btn.innerText = "Invia";
   }
 });
 </script>
