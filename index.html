@@ -374,13 +374,13 @@ track.addEventListener("scroll",()=>{
   dots.forEach((d,i)=>d.classList.toggle("active",i===index));
 });
 
-/* RSVP FIX */
+/* RSVP FIX 2316*/
 document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
   e.preventDefault();
 
   const form = e.target;
 
-  const data = {
+  const payload = {
     name: form.name.value,
     attendance: form.attendance.value,
     allergies: form.allergies.value,
@@ -390,16 +390,25 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
   };
 
   try{
-    await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec",{
-      method:"POST",
-      body:new FormData(form)
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
     });
+
+    const text = await res.text();
+    console.log("RISPOSTA SERVER:", text);
+
+    if(!res.ok) throw new Error("Server error");
 
     form.style.display="none";
     document.getElementById("success").style.display="block";
 
   }catch(err){
-    alert("Errore invio");
+    console.error(err);
+    alert("Errore invio RSVP");
   }
 });
 </script>
