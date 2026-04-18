@@ -90,7 +90,7 @@ h1 em{color:#c4583a;}
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center top;
+  object-position:center center;
   display:block;
 }
 
@@ -138,10 +138,7 @@ h1 em{color:#c4583a;}
   border:14px solid #fff;
   border-bottom:62px solid #fff;
   background:#fff;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  display:block;
   position:relative;
   cursor:pointer;
   transition:transform .2s;
@@ -158,9 +155,11 @@ h1 em{color:#c4583a;}
   display:block;
 }
 
-/* LABEL dentro la banda bianca inferiore */
+/* LABEL dentro la banda bianca inferiore (border-bottom 62px) */
 .card-label{
-  position:relative;
+  position:absolute;
+  bottom:-62px;
+  left:0;
   width:100%;
   height:62px;
   display:flex;
