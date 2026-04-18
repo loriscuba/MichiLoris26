@@ -105,6 +105,57 @@ h1 em{color:#c4583a;}
 }
 
 /* POLAROID */
+/* CARD */
+.card{
+  position:relative;
+  cursor:pointer;
+  transition:.25s;
+}
+
+/* CLICK FEEDBACK */
+.card:active{
+  transform:scale(0.96);
+}
+
+/* PULSE ANIMATION */
+.card:first-of-type::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:2px;
+  box-shadow:0 0 0 rgba(196,88,58,0.6);
+  animation:pulse 2.5s infinite;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(196,88,58,0.4);}
+  70%{box-shadow:0 0 0 18px rgba(196,88,58,0);}
+  100%{box-shadow:0 0 0 0 rgba(196,88,58,0);}
+}
+
+/* TAP LABEL */
+.tap-hint{
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  font-size:0.65rem;
+  letter-spacing:.2em;
+  background:rgba(0,0,0,0.55);
+  color:#fff;
+  padding:6px 10px;
+  border-radius:4px;
+  opacity:0;
+  animation:fadeInOut 4s forwards;
+}
+
+/* APPARE E SPARISCE */
+@keyframes fadeInOut{
+  0%{opacity:0;}
+  15%{opacity:1;}
+  70%{opacity:1;}
+  100%{opacity:0;}
+}
+  
 .card{
   width:80vw;
   max-width:380px;
@@ -253,7 +304,6 @@ h1 em{color:#c4583a;}
       <div class="intro-full">
         <img src="img/partecipazione.jpg">
       </div>
-      <div class="arrow">→</div>
     </div>
 
     <!-- LOCATION -->
@@ -261,6 +311,7 @@ h1 em{color:#c4583a;}
       <div class="card" onclick="openModal('location')">
         <img src="img/location.jpeg">
       </div>
+      <div class="tap-hint">TAP</div>
       <div class="label">Location</div>
     </div>
 
@@ -269,6 +320,7 @@ h1 em{color:#c4583a;}
       <div class="card" onclick="openModal('rsvp')">
         <img src="img/rsvp.jpeg">
       </div>
+      <div class="tap-hint">TAP</div>
       <div class="label">RSVP</div>
     </div>
 
@@ -277,6 +329,7 @@ h1 em{color:#c4583a;}
       <div class="card" onclick="openModal('gift')">
         <img src="img/viaggio.jpg">
       </div>
+      <div class="tap-hint">TAP</div>
       <div class="label">Il Viaggio</div>
     </div>
 
@@ -302,8 +355,16 @@ const dots = document.querySelectorAll(".dot");
 const header = document.querySelector("header");
 
 function openModal(id){
-  document.getElementById("modal-"+id).classList.add("open");
+  const modal = document.getElementById("modal-"+id);
+  if(!modal) return;
+
+  modal.classList.add("open");
   document.body.style.overflow="hidden";
+
+  // 📳 vibrazione mobile
+  if(navigator.vibrate){
+    navigator.vibrate(30);
+  }
 }
 
 function closeModal(){
