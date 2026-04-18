@@ -14,7 +14,6 @@ body{
   font-family:'Jost',sans-serif;
   background:#e8e0d0;
   overflow:hidden;
-  color:#1a1a1a;
 }
 
 /* HEADER */
@@ -50,25 +49,19 @@ h1 em{color:#c4583a;}
   opacity:.6;
 }
 
-/* WRAPPER */
-.wrapper{
-  height:100vh;
-  position:relative;
-}
+/* CAROUSEL */
+.wrapper{height:100vh;}
 
-/* TRACK */
 .track{
   height:100%;
   display:flex;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
-  -webkit-overflow-scrolling:touch;
 }
 
 .track::-webkit-scrollbar{display:none;}
 
-/* SLIDE */
 .slide{
   min-width:100%;
   height:100%;
@@ -77,30 +70,24 @@ h1 em{color:#c4583a;}
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  position:relative;
 }
 
-/* INTRO FULL SCREEN */
+/* INTRO FIX — NO TAGLI */
 .intro-full{
   width:100%;
   height:100vh;
-  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .intro-full img{
   width:100%;
   height:100%;
-  object-fit:cover;
-  transform:scale(1.05);
-  animation:zoomIn 2s ease forwards;
+  object-fit:contain; /* 🔥 FIX IMPORTANTE */
 }
 
-@keyframes zoomIn{
-  from{transform:scale(1.1);}
-  to{transform:scale(1.02);}
-}
-
-/* POLAROID CARD */
+/* POLAROID */
 .card{
   width:82vw;
   max-width:380px;
@@ -109,11 +96,7 @@ h1 em{color:#c4583a;}
   background:#fff;
   overflow:hidden;
   cursor:pointer;
-  transition:.25s;
-  box-shadow:0 25px 60px rgba(0,0,0,0.15);
 }
-
-.card:active{transform:scale(.97);}
 
 .card img{
   width:100%;
@@ -128,14 +111,14 @@ h1 em{color:#c4583a;}
   margin-top:8px;
 }
 
-/* TAP HINT */
+/* TAP */
 .tap{
   font-size:.7rem;
   opacity:.5;
   letter-spacing:.2em;
 }
 
-/* DOTS + FRECCIA */
+/* CONTROLLI */
 .controls{
   position:fixed;
   bottom:18px;
@@ -157,7 +140,6 @@ h1 em{color:#c4583a;}
   border-radius:50%;
   background:#b8b0a4;
   opacity:.4;
-  transition:.2s;
 }
 
 .dot.active{
@@ -166,9 +148,8 @@ h1 em{color:#c4583a;}
   transform:scale(1.3);
 }
 
-/* FRECCIA (più “Apple”) */
 .arrow{
-  font-size:2.8rem;
+  font-size:2.6rem;
   font-weight:900;
   color:#c4583a;
   animation:move 1.2s infinite;
@@ -176,7 +157,7 @@ h1 em{color:#c4583a;}
 
 @keyframes move{
   0%{transform:translateX(0);}
-  50%{transform:translateX(12px);}
+  50%{transform:translateX(10px);}
   100%{transform:translateX(0);}
 }
 
@@ -205,15 +186,9 @@ h1 em{color:#c4583a;}
   width:90%;
   max-width:850px;
   background:#f3eadc;
-  border-radius:18px;
+  border-radius:16px;
   padding:2rem;
   position:relative;
-  transform:scale(.95);
-  transition:.3s;
-}
-
-.modal.open .modal-content{
-  transform:scale(1);
 }
 
 .close{
@@ -226,11 +201,12 @@ h1 em{color:#c4583a;}
   cursor:pointer;
 }
 
-/* GRID */
+/* GRID MODALI RIPRISTINATO */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:1.5rem;
+  align-items:center;
 }
 
 .img img{
@@ -241,28 +217,6 @@ h1 em{color:#c4583a;}
 @media(max-width:768px){
   .grid{grid-template-columns:1fr;}
 }
-
-/* ONBOARDING */
-.hint-overlay{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  background:rgba(0,0,0,0.25);
-  color:white;
-  font-size:1.1rem;
-  letter-spacing:.2em;
-  z-index:999;
-  animation:fadeOut 4s forwards;
-}
-
-@keyframes fadeOut{
-  0%{opacity:1;}
-  70%{opacity:1;}
-  100%{opacity:0;visibility:hidden;}
-}
 </style>
 </head>
 
@@ -272,11 +226,6 @@ h1 em{color:#c4583a;}
   <h1>Michela <em>&</em> Loris</h1>
   <div class="subtitle">29 · 08 · 2026</div>
 </header>
-
-<!-- onboarding -->
-<div class="hint-overlay">
-  SWIPE → TAP → EXPLORE
-</div>
 
 <div class="wrapper">
   <div class="track" id="track">
@@ -306,7 +255,7 @@ h1 em{color:#c4583a;}
       <div class="label">RSVP</div>
     </div>
 
-    <!-- GIFT -->
+    <!-- REGALO -->
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <img src="img/viaggio.jpg">
@@ -329,25 +278,49 @@ h1 em{color:#c4583a;}
   <div class="arrow">➜</div>
 </div>
 
-<!-- MODALI (esempio base) -->
+<!-- MODALI RIPRISTINATI -->
 <div id="modal-location" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
-    LOCATION
+    <div class="grid">
+      <div class="img">
+        <img src="img/cadivoi.png">
+      </div>
+      <div>
+        <h2>Location</h2>
+        <p>Agriturismo immerso nella natura</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <div id="modal-rsvp" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
-    RSVP
+    <div class="grid">
+      <div class="img">
+        <img src="img/rsvp2.jpeg">
+      </div>
+      <div>
+        <h2>RSVP</h2>
+        <p>Conferma presenza e dettagli evento</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <div id="modal-gift" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
-    REGALO
+    <div class="grid">
+      <div class="img">
+        <img src="img/mexico.png">
+      </div>
+      <div>
+        <h2>Viaggio di nozze</h2>
+        <p>IBAN: IT60 X054 ...</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -368,18 +341,17 @@ function closeModal(){
   document.body.style.overflow="";
 }
 
-/* UI */
-function update(){
+track.addEventListener("scroll", ()=>{
   const i = Math.round(track.scrollLeft / window.innerWidth);
-
   dots.forEach((d,idx)=>d.classList.toggle("active", idx===i));
 
   if(i===0) header.classList.add("hide");
   else header.classList.remove("hide");
-}
+});
 
-track.addEventListener("scroll", update);
-window.addEventListener("load", update);
+window.addEventListener("load", ()=>{
+  track.dispatchEvent(new Event("scroll"));
+});
 </script>
 
 </body>
