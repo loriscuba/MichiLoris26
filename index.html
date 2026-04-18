@@ -89,8 +89,9 @@ h1 em{color:#c4583a;}
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
   object-position:center center;
+  background:#e8e0d0;
   display:block;
 }
 
@@ -231,15 +232,18 @@ h1 em{color:#c4583a;}
 }
 
 /* active (mobile touch) */
-.card:active .card-overlay{
+.card:active .card-overlay,
+.card.touched .card-overlay{
   background:rgba(196,88,58,0.45);
 }
-.card:active .card-overlay-icon{
+.card:active .card-overlay-icon,
+.card.touched .card-overlay-icon{
   opacity:1;
   transform:scale(1);
   border-color:rgba(255,255,255,0.8);
 }
-.card:active .card-overlay-text{
+.card:active .card-overlay-text,
+.card.touched .card-overlay-text{
   opacity:1;
 }
 
@@ -581,6 +585,53 @@ track.addEventListener("scroll", () => {
 });
 
 header.classList.add("hidden");
+
+/* OVERLAY MOBILE — mostra brevemente l'overlay su ogni card per suggerire il tap */
+function hintCard(card) {
+  card.classList.add("touched");
+  setTimeout(() => card.classList.remove("touched"), 900);
+}
+
+// Su mobile touchstart mostra overlay + apre modal al touchend
+document.querySelectorAll(".card").forEach(card => {
+  let touchMoved = false;
+
+  card.addEventListener("touchstart", () => {
+    touchMoved = false;
+    card.classList.add("touched");
+  }, { passive: true });
+
+  card.addEventListener("touchmove", () => {
+    touchMoved = true;
+    card.classList.remove("touched");
+  }, { passive: true });
+
+  card.addEventListener("touchend", () => {
+    card.classList.remove("touched");
+  }, { passive: true });
+});
+
+// Hint automatico: fa lampeggiare le card in sequenza dopo 2.5s
+setTimeout(() => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, i) => {
+    // Lampeggia solo la card visibile (slide attiva)
+    if (i === 0) {
+      // Prima card = slide 2, lampeggia subito
+      hintCard(card);
+    }
+  });
+}, 2500);
+
+// Ri-lampeggia la card attiva ogni volta che l'utente arriva su una nuova slide
+track.addEventListener("scroll", () => {
+  const index = Math.round(track.scrollLeft / window.innerWidth);
+  // index 0 = slide intro, index 1+ = card slides
+  if (index >= 1) {
+    const card = document.querySelectorAll(".card")[index - 1];
+    if (card) setTimeout(() => hintCard(card), 400);
+  }
+});
 
 /* RSVP */
 document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
