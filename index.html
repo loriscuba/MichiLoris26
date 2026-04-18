@@ -39,7 +39,7 @@ header.hidden{
 h1{
   font-family:'Anton',sans-serif;
   font-weight:400;
-  font-size:1.9rem;
+  font-size:2.3rem;
   letter-spacing:.05em;
   text-transform:uppercase;
 }
@@ -258,6 +258,19 @@ h1 em{color:#c4583a;}
   animation:pulse 2s ease 2s 2;
 }
 
+/* CAPTION sotto la card */
+.slide-caption{
+  font-family:'Cormorant',serif;
+  font-size:1rem;
+  font-weight:300;
+  line-height:1.6;
+  text-align:center;
+  color:#6b5e52;
+  padding:0 2rem;
+  opacity:.85;
+  font-style:italic;
+}
+
 /* DOTS */
 .dots{
   position:fixed;
@@ -436,6 +449,7 @@ button[type="submit"]{
         </div>
         <div class="card-label">Location</div>
       </div>
+      <div class="slide-caption">Immersi nella natura,<br>dove tutto è iniziato.</div>
     </div>
 
     <!-- SLIDE 3: RSVP -->
@@ -455,13 +469,14 @@ button[type="submit"]{
         </div>
         <div class="card-label">RSVP</div>
       </div>
+      <div class="slide-caption">Facci sapere se ci sei —<br>ci tieni compagnia contarci.</div>
     </div>
 
     <!-- SLIDE 4: Regalo -->
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <div class="card-img-wrap">
-          <img src="img/viaggio.jpg" alt="Il nostro Viaggio">
+          <img src="img/viaggio.jpg" alt="Regalo">
           <div class="card-overlay">
             <div class="card-overlay-icon">
               <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -472,8 +487,9 @@ button[type="submit"]{
             <span class="card-overlay-text">Apri</span>
           </div>
         </div>
-        <div class="card-label">Il nostro Viaggio</div>
+        <div class="card-label">Regalo</div>
       </div>
+      <div class="slide-caption">La vostra presenza è il regalo più bello.<br>Ma se volete aggiungerci un sogno…</div>
     </div>
 
   </div>
