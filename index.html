@@ -70,17 +70,24 @@ h1 em{color:#c4583a;}
 
 /* POLAROID */
 .card{
+  width:80vw;
+  max-width:380px;
+  height:60vh;
+  border:14px solid #fff;
+  border-bottom:55px solid #fff;
   background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,0.15);
+  cursor:pointer;
+  transition:.3s;
 }
 
-.card img{
+.card:hover{transform:scale(1.03);}.card:hover{transform:scale(1.03);}
+
+.card img{.card img{
   width:100%;
-  height:auto;
-  max-height:100%;
-  object-fit:contain;
+  height:100%;
+  object-fit:cover;
 }
 
 .label{
