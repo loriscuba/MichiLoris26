@@ -27,6 +27,13 @@ header{
   z-index:10;
   background:rgba(232,224,208,0.75);
   backdrop-filter:blur(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+header.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-10px);
 }
 
 h1{
@@ -55,25 +62,6 @@ h1 em{color:#c4583a;}
   -webkit-overflow-scrolling:touch;
 }
 
-  /* INTRO */
-.intro-card{
-  cursor:default;
-}
-
-/* FRECCIA */
-.arrow{
-  font-size:2rem;
-  color:#c4583a;
-  opacity:0.6;
-  animation:arrowMove 1.5s infinite;
-}
-
-@keyframes arrowMove{
-  0%{transform:translateX(0);}
-  50%{transform:translateX(12px);}
-  100%{transform:translateX(0);}
-}
-
 .track::-webkit-scrollbar{display:none;}
 
 .slide{
@@ -87,26 +75,115 @@ h1 em{color:#c4583a;}
   gap:1rem;
 }
 
-/* POLAROID */
+/* INTRO SLIDE — full screen */
+.slide.intro{
+  position:relative;
+  padding:0;
+  gap:0;
+}
+
+.intro-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
+/* FRECCIA — vicino ai dots */
+.intro-arrow{
+  position:absolute;
+  bottom:36px; /* sopra i dots */
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  z-index:5;
+}
+
+.arrow-label{
+  font-size:.55rem;
+  letter-spacing:.25em;
+  color:#fff;
+  opacity:.75;
+  text-shadow:0 1px 4px rgba(0,0,0,.4);
+}
+
+.arrow-icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:arrowMove 1.5s infinite;
+}
+
+.arrow-icon svg{
+  width:32px;
+  height:32px;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));
+}
+
+@keyframes arrowMove{
+  0%{transform:translateX(0);}
+  50%{transform:translateX(14px);}
+  100%{transform:translateX(0);}
+}
+
+/* POLAROID (slide 2-3-4) */
 .card{
   width:80vw;
   max-width:380px;
   border:14px solid #fff;
   border-bottom:55px solid #fff;
   background:#fff;
-
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
+  cursor:pointer;
+  transition:transform .2s;
 }
 
-.card:hover{transform:scale(1.03);}
+.card:active{transform:scale(0.97);}
 
 .card img{
   width:100%;
   height:auto;
   max-height:55vh;
   object-fit:contain;
+}
+
+/* HINT "tocca per aprire" */
+.tap-hint{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Jost',sans-serif;
+  font-size:.58rem;
+  letter-spacing:.22em;
+  color:#c4583a;
+  opacity:0;
+  animation: hintFade 3s ease 1s forwards;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+@keyframes hintFade{
+  0%{opacity:0;}
+  20%{opacity:1;}
+  70%{opacity:1;}
+  100%{opacity:0;}
+}
+
+/* piccolo tocco icona dentro hint */
+.tap-hint::before{
+  content:"↑ ";
 }
 
 .label{
@@ -148,7 +225,6 @@ h1 em{color:#c4583a;}
   align-items:center;
   justify-content:center;
   background:rgba(0,0,0,0.6);
-
   opacity:0;
   visibility:hidden;
   pointer-events:none;
@@ -251,7 +327,7 @@ button{
 
 <body>
 
-<header>
+<header id="header">
   <h1>Michela <em>&</em> Loris</h1>
   <div class="subtitle">29 · 08 · 2026</div>
 </header>
@@ -260,31 +336,43 @@ button{
 <div class="wrapper">
   <div class="track" id="track">
 
-     <!-- INTRO (NUOVA) -->
+    <!-- SLIDE 1: INTRO full screen -->
     <div class="slide intro">
-      <div class="card intro-card">
-        <img src="img/partecipazione.jpg">
+      <img class="intro-bg" src="img/partecipazione.jpg" alt="Michela e Loris">
+      <div class="intro-arrow">
+        <span class="arrow-label">scorri</span>
+        <div class="arrow-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 16 L24 16 M18 10 L24 16 L18 22"
+              stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </div>
-      <div class="arrow">→</div>
     </div>
-    
+
+    <!-- SLIDE 2: Location -->
     <div class="slide">
       <div class="card" onclick="openModal('location')">
-        <img src="img/location.jpeg">
+        <img src="img/location.jpeg" alt="Location">
+        <span class="tap-hint">tocca per aprire</span>
       </div>
       <div class="label">Location</div>
     </div>
 
+    <!-- SLIDE 3: RSVP -->
     <div class="slide">
       <div class="card" onclick="openModal('rsvp')">
-        <img src="img/rsvp.jpeg">
+        <img src="img/rsvp.jpeg" alt="RSVP">
+        <span class="tap-hint">tocca per aprire</span>
       </div>
       <div class="label">RSVP</div>
     </div>
 
+    <!-- SLIDE 4: Regalo -->
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
-        <img src="img/viaggio.jpg">
+        <img src="img/viaggio.jpg" alt="Regalo">
+        <span class="tap-hint">tocca per aprire</span>
       </div>
       <div class="label">Regalo</div>
     </div>
@@ -300,13 +388,13 @@ button{
   <div class="dot"></div>
 </div>
 
-<!-- LOCATION -->
+<!-- MODAL: LOCATION -->
 <div id="modal-location" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
     <div class="grid">
       <div class="img">
-        <img src="img/cadivoi.png">
+        <img src="img/cadivoi.png" alt="Ca di Voi">
       </div>
       <div>
         <div class="eyebrow">Location</div>
@@ -318,21 +406,18 @@ button{
   </div>
 </div>
 
-<!-- RSVP -->
+<!-- MODAL: RSVP -->
 <div id="modal-rsvp" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
-
     <div class="grid">
       <div class="img">
-        <img src="img/rsvp2.jpeg">
+        <img src="img/rsvp2.jpeg" alt="RSVP">
       </div>
-
       <div>
         <div class="eyebrow">RSVP</div>
         <h2 class="title">Conferma presenza</h2>
         <div class="rule"></div>
-
         <form id="rsvpForm">
           <input name="name" placeholder="Nome e Cognome" required>
           <select name="attendance">
@@ -343,27 +428,24 @@ button{
           <input name="allergies" placeholder="Hai qualche allergia alimentare da segnalarci?">
           <input name="song" placeholder="Scrivici la canzone che vorresti ballare insieme a noi!">
           <input name="car" placeholder="Sei munito di macchina e avresti un posto per qualcuno?">
-          <textarea name="questions" placeholder="Sei hai qualsiasi domanda sulla sulll'evento, scrivicelo qui!"></textarea>
-
+          <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
           <button type="submit">Invia</button>
         </form>
-
         <div id="success" style="display:none;color:green;margin-top:10px;">
           ✔ Inviato con successo
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- GIFT -->
+<!-- MODAL: GIFT -->
 <div id="modal-gift" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
     <div class="grid">
       <div class="img">
-        <img src="img/mexico.png">
+        <img src="img/mexico.png" alt="Viaggio di nozze">
       </div>
       <div>
         <div class="eyebrow">Regalo</div>
@@ -377,7 +459,8 @@ button{
 
 <script>
 const track = document.getElementById("track");
-const dots = document.querySelectorAll(".dot");
+const dots  = document.querySelectorAll(".dot");
+const header = document.getElementById("header");
 
 function openModal(id){
   document.getElementById("modal-"+id).classList.add("open");
@@ -389,25 +472,30 @@ function closeModal(){
   document.body.style.overflow="";
 }
 
-/* CLOSE BACKDROP */
 document.querySelectorAll(".modal").forEach(m=>{
-  m.addEventListener("click",e=>{
-    if(e.target===m) closeModal();
-  });
+  m.addEventListener("click",e=>{ if(e.target===m) closeModal(); });
 });
 
-/* DOT SYNC */
+/* DOT SYNC + HEADER VISIBILITY */
 track.addEventListener("scroll",()=>{
   const index = Math.round(track.scrollLeft / window.innerWidth);
   dots.forEach((d,i)=>d.classList.toggle("active",i===index));
+
+  /* nascondi header sulla slide 0, mostralo sulle altre */
+  if(index === 0){
+    header.classList.add("hidden");
+  } else {
+    header.classList.remove("hidden");
+  }
 });
 
-/* RSVP FIX 2341*/
+/* header nascosto all'avvio (siamo sulla slide 0) */
+header.classList.add("hidden");
+
+/* RSVP */
 document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   const form = e.target;
-
   const payload = new URLSearchParams({
     name: form.name.value,
     attendance: form.attendance.value,
@@ -416,25 +504,18 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     car: form.car.value,
     questions: form.questions.value
   });
-
   const btn = form.querySelector("button");
   btn.disabled = true;
   btn.innerText = "Invio...";
-
   try {
     await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
       method: "POST",
       mode: "no-cors",
       body: payload
     });
-
-    // ⚠️ con no-cors NON possiamo sapere risposta reale
     form.reset();
     form.style.display = "none";
     document.getElementById("success").style.display = "block";
-
-    console.log("RSVP inviato (fire-and-forget)");
-
   } catch (err) {
     console.error("Errore fetch:", err);
     alert("Errore invio RSVP");
