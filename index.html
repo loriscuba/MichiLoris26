@@ -247,7 +247,7 @@ button{
   .grid{grid-template-columns:1fr;}
 }
 
-  header{
+header{
   transition: opacity .4s ease, transform .4s ease;
 }
 
@@ -303,6 +303,8 @@ header.hide{
   <h1>Michela <em>&</em> Loris</h1>
   <div class="subtitle">29 · 08 · 2026</div>
 </header>
+
+  <header class="hide">
 
 <!-- CAROUSEL -->
 <div class="wrapper">
@@ -452,13 +454,27 @@ track.addEventListener("scroll",()=>{
   dots.forEach((d,i)=>d.classList.toggle("active",i===index));
 
   // HEADER SHOW/HIDE
-  const header = document.querySelector("header");
+const header = document.querySelector("header");
 
+function updateUI(){
+  const index = Math.round(track.scrollLeft / window.innerWidth);
+
+  // DOTS
+  dots.forEach((d,i)=>d.classList.toggle("active",i===index));
+
+  // HEADER
   if(index === 0){
     header.classList.add("hide");
   }else{
     header.classList.remove("hide");
   }
+}
+
+// SCROLL
+track.addEventListener("scroll", updateUI);
+
+// 🔥 FIX INIZIALE (fondamentale)
+window.addEventListener("load", updateUI);
 });
 
 /* RSVP FIX 2341*/
