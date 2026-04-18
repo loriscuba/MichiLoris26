@@ -50,7 +50,7 @@ h1 em{color:#c4583a;}
   opacity:.6;
 }
 
-/* WRAPPER */
+/* CAROUSEL */
 .wrapper{height:100vh;}
 
 .track{
@@ -75,7 +75,7 @@ h1 em{color:#c4583a;}
   gap:1rem;
 }
 
-/* INTRO FULL */
+/* INTRO */
 .intro-full{
   width:100%;
   height:100vh;
@@ -113,11 +113,11 @@ h1 em{color:#c4583a;}
   font-size:1.5rem;
 }
 
-/* TAP */
-.tap-hint{
+/* TAP (pulito, non invasivo) */
+.tap{
   font-size:.65rem;
-  letter-spacing:.2em;
-  opacity:.6;
+  letter-spacing:.25em;
+  opacity:.5;
 }
 
 /* DOTS + ARROW */
@@ -128,7 +128,7 @@ h1 em{color:#c4583a;}
   transform:translateX(-50%);
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:14px;
 }
 
 .dots{
@@ -151,10 +151,10 @@ h1 em{color:#c4583a;}
 }
 
 .arrow{
-  font-size:2.5rem;
-  font-weight:900;
+  font-size:2.4rem;
+  font-weight:800;
   color:#c4583a;
-  animation:move 1.2s infinite;
+  animation:move 1.3s infinite;
 }
 
 @keyframes move{
@@ -216,6 +216,23 @@ h1 em{color:#c4583a;}
   border-radius:12px;
 }
 
+/* RSVP FIX LAYOUT */
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border:1px solid #ddd;
+  border-radius:6px;
+}
+
+button{
+  background:#c4583a;
+  color:#fff;
+  border:none;
+  padding:.8rem 1.2rem;
+  cursor:pointer;
+}
+
 @media(max-width:768px){
   .grid{grid-template-columns:1fr;}
 }
@@ -244,7 +261,7 @@ h1 em{color:#c4583a;}
   <div class="card" onclick="openModal('location')">
     <img src="img/location.jpeg">
   </div>
-  <div class="tap-hint">TAP PER APRIRE</div>
+  <div class="tap">TAP PER APRIRE</div>
   <div class="label">Location</div>
 </div>
 
@@ -253,7 +270,7 @@ h1 em{color:#c4583a;}
   <div class="card" onclick="openModal('rsvp')">
     <img src="img/rsvp.jpeg">
   </div>
-  <div class="tap-hint">TAP PER APRIRE</div>
+  <div class="tap">TAP PER APRIRE</div>
   <div class="label">RSVP</div>
 </div>
 
@@ -262,8 +279,8 @@ h1 em{color:#c4583a;}
   <div class="card" onclick="openModal('gift')">
     <img src="img/viaggio.jpg">
   </div>
-  <div class="tap-hint">TAP PER APRIRE</div>
-  <div class="label">Viaggio</div>
+  <div class="tap">TAP PER APRIRE</div>
+  <div class="label">Il Viaggio</div>
 </div>
 
 </div>
@@ -299,40 +316,58 @@ h1 em{color:#c4583a;}
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
 
-    <form id="rsvpForm">
-      <input name="name" placeholder="Nome e Cognome" required>
-      <select name="attendance">
-        <option value="">Parteciperai?</option>
-        <option>Sì</option>
-        <option>No</option>
-      </select>
-      <input name="allergies" placeholder="Allergie">
-      <input name="song" placeholder="Canzone">
-      <input name="car" placeholder="Passaggi">
-      <textarea name="questions" placeholder="Note"></textarea>
+    <div class="grid">
+      <div class="img">
+        <img src="img/rsvp2.jpeg">
+      </div>
 
-      <button type="submit">Invia</button>
-    </form>
+      <div>
+        <h2>RSVP</h2>
 
-    <div id="success" style="display:none;color:green;margin-top:10px;">
-      ✔ Inviato
+        <form id="rsvpForm">
+          <input name="name" placeholder="Nome e Cognome" required>
+          <select name="attendance">
+            <option value="">Parteciperai?</option>
+            <option>Sì</option>
+            <option>No</option>
+          </select>
+          <input name="allergies" placeholder="Allergie">
+          <input name="song" placeholder="Canzone">
+          <input name="car" placeholder="Passaggi">
+          <textarea name="questions" placeholder="Note"></textarea>
+
+          <button type="submit">Invia</button>
+        </form>
+
+        <div id="success" style="display:none;color:green;margin-top:10px;">
+          ✔ Inviato
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MODAL GIFT -->
+<!-- MODAL GIFT (RIPRISTINATO) -->
 <div id="modal-gift" class="modal">
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
-    <h2>Viaggio di nozze</h2>
-    <p>IBAN: IT60 ...</p>
+
+    <div class="grid">
+      <div class="img">
+        <img src="img/mexico.png">
+      </div>
+      <div>
+        <h2>Viaggio di nozze</h2>
+        <p>IBAN: IT60 X054 ...</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-const track = document.getElementById("track");
-const dots = document.querySelectorAll(".dot");
-const header = document.getElementById("header");
+const track=document.getElementById("track");
+const dots=document.querySelectorAll(".dot");
+const header=document.getElementById("header");
 
 function openModal(id){
   document.getElementById("modal-"+id).classList.add("open");
@@ -345,28 +380,11 @@ function closeModal(){
 }
 
 track.addEventListener("scroll",()=>{
-  const i = Math.round(track.scrollLeft / window.innerWidth);
+  const i=Math.round(track.scrollLeft/window.innerWidth);
   dots.forEach((d,idx)=>d.classList.toggle("active",idx===i));
 
   if(i===0) header.classList.add("hide");
   else header.classList.remove("hide");
-});
-
-/* RSVP */
-document.getElementById("rsvpForm")?.addEventListener("submit", async (e)=>{
-  e.preventDefault();
-  const form = e.target;
-
-  const data = new URLSearchParams(new FormData(form));
-
-  await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec",{
-    method:"POST",
-    mode:"no-cors",
-    body:data
-  });
-
-  form.style.display="none";
-  document.getElementById("success").style.display="block";
 });
 </script>
 
