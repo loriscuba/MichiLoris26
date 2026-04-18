@@ -27,7 +27,7 @@ header{
   z-index:10;
   background:rgba(232,224,208,0.75);
   backdrop-filter:blur(10px);
-  transition: opacity .4s ease, transform .4s ease;
+  transition:opacity .4s ease,transform .4s ease;
 }
 
 header.hidden{
@@ -72,10 +72,10 @@ h1 em{color:#c4583a;}
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  gap:1rem;
+  gap:.6rem;
 }
 
-/* INTRO SLIDE — full screen */
+/* INTRO SLIDE */
 .slide.intro{
   position:relative;
   padding:0;
@@ -92,16 +92,16 @@ h1 em{color:#c4583a;}
   display:block;
 }
 
-/* FRECCIA — vicino ai dots */
+/* FRECCIA rossa spessa */
 .intro-arrow{
   position:absolute;
-  bottom:36px; /* sopra i dots */
+  bottom:34px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:4px;
+  gap:3px;
   z-index:5;
 }
 
@@ -109,23 +109,18 @@ h1 em{color:#c4583a;}
   font-size:.55rem;
   letter-spacing:.25em;
   color:#fff;
-  opacity:.75;
-  text-shadow:0 1px 4px rgba(0,0,0,.4);
+  opacity:.85;
+  text-shadow:0 1px 4px rgba(0,0,0,.5);
 }
 
 .arrow-icon{
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   animation:arrowMove 1.5s infinite;
 }
 
 .arrow-icon svg{
-  width:32px;
-  height:32px;
-  filter:drop-shadow(0 1px 3px rgba(0,0,0,.35));
+  width:40px;
+  height:40px;
+  filter:drop-shadow(0 1px 5px rgba(0,0,0,.45));
 }
 
 @keyframes arrowMove{
@@ -134,19 +129,21 @@ h1 em{color:#c4583a;}
   100%{transform:translateX(0);}
 }
 
-/* POLAROID (slide 2-3-4) */
+/* POLAROID più grande */
 .card{
-  width:80vw;
-  max-width:380px;
+  width:88vw;
+  max-width:420px;
   border:14px solid #fff;
-  border-bottom:55px solid #fff;
+  border-bottom:62px solid #fff;
   background:#fff;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   position:relative;
   cursor:pointer;
   transition:transform .2s;
+  box-shadow:0 4px 22px rgba(0,0,0,.13);
 }
 
 .card:active{transform:scale(0.97);}
@@ -154,41 +151,47 @@ h1 em{color:#c4583a;}
 .card img{
   width:100%;
   height:auto;
-  max-height:55vh;
+  max-height:62vh;
   object-fit:contain;
+  display:block;
+}
+
+/* LABEL dentro la banda bianca inferiore */
+.card-label{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:62px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cormorant',serif;
+  font-size:1.5rem;
+  color:#1a1a1a;
+  pointer-events:none;
 }
 
 /* HINT "tocca per aprire" */
 .tap-hint{
   position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
+  bottom:9px;
+  right:14px;
   font-family:'Jost',sans-serif;
-  font-size:.58rem;
-  letter-spacing:.22em;
+  font-size:.5rem;
+  letter-spacing:.18em;
   color:#c4583a;
   opacity:0;
-  animation: hintFade 3s ease 1s forwards;
+  animation:hintFade 3.5s ease 1s forwards;
   white-space:nowrap;
   pointer-events:none;
 }
 
 @keyframes hintFade{
   0%{opacity:0;}
-  20%{opacity:1;}
-  70%{opacity:1;}
+  15%{opacity:1;}
+  75%{opacity:1;}
   100%{opacity:0;}
-}
-
-/* piccolo tocco icona dentro hint */
-.tap-hint::before{
-  content:"↑ ";
-}
-
-.label{
-  font-family:'Cormorant',serif;
-  font-size:1.5rem;
 }
 
 /* DOTS */
@@ -253,14 +256,18 @@ h1 em{color:#c4583a;}
   transform:scale(1);
 }
 
+/* X rossa più grande */
 .close{
   position:absolute;
   top:10px;
-  right:15px;
-  font-size:2rem;
+  right:16px;
+  font-size:2.6rem;
+  line-height:1;
   border:none;
   background:none;
   cursor:pointer;
+  color:#c4583a;
+  font-weight:300;
 }
 
 /* GRID */
@@ -276,7 +283,6 @@ h1 em{color:#c4583a;}
   border-radius:12px;
 }
 
-/* TEXT */
 .eyebrow{
   font-size:.6rem;
   letter-spacing:.3em;
@@ -310,7 +316,7 @@ input,select,textarea{
   border-radius:6px;
 }
 
-button{
+button[type="submit"]{
   background:#c4583a;
   color:#fff;
   border:none;
@@ -332,7 +338,6 @@ button{
   <div class="subtitle">29 · 08 · 2026</div>
 </header>
 
-<!-- CAROUSEL -->
 <div class="wrapper">
   <div class="track" id="track">
 
@@ -342,9 +347,9 @@ button{
       <div class="intro-arrow">
         <span class="arrow-label">scorri</span>
         <div class="arrow-icon">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 16 L24 16 M18 10 L24 16 L18 22"
-              stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 20 L34 20 M23 9 L34 20 L23 31"
+              stroke="#c4583a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
@@ -354,27 +359,27 @@ button{
     <div class="slide">
       <div class="card" onclick="openModal('location')">
         <img src="img/location.jpeg" alt="Location">
-        <span class="tap-hint">tocca per aprire</span>
+        <div class="card-label">Location</div>
+        <span class="tap-hint">tocca per aprire ↑</span>
       </div>
-      <div class="label">Location</div>
     </div>
 
     <!-- SLIDE 3: RSVP -->
     <div class="slide">
       <div class="card" onclick="openModal('rsvp')">
         <img src="img/rsvp.jpeg" alt="RSVP">
-        <span class="tap-hint">tocca per aprire</span>
+        <div class="card-label">RSVP</div>
+        <span class="tap-hint">tocca per aprire ↑</span>
       </div>
-      <div class="label">RSVP</div>
     </div>
 
     <!-- SLIDE 4: Regalo -->
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <img src="img/viaggio.jpg" alt="Regalo">
-        <span class="tap-hint">tocca per aprire</span>
+        <div class="card-label">Regalo</div>
+        <span class="tap-hint">tocca per aprire ↑</span>
       </div>
-      <div class="label">Regalo</div>
     </div>
 
   </div>
@@ -393,9 +398,7 @@ button{
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
     <div class="grid">
-      <div class="img">
-        <img src="img/cadivoi.png" alt="Ca di Voi">
-      </div>
+      <div class="img"><img src="img/cadivoi.png" alt="Ca di Voi"></div>
       <div>
         <div class="eyebrow">Location</div>
         <h2 class="title">Ca di Voi</h2>
@@ -411,9 +414,7 @@ button{
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
     <div class="grid">
-      <div class="img">
-        <img src="img/rsvp2.jpeg" alt="RSVP">
-      </div>
+      <div class="img"><img src="img/rsvp2.jpeg" alt="RSVP"></div>
       <div>
         <div class="eyebrow">RSVP</div>
         <h2 class="title">Conferma presenza</h2>
@@ -431,9 +432,7 @@ button{
           <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
           <button type="submit">Invia</button>
         </form>
-        <div id="success" style="display:none;color:green;margin-top:10px;">
-          ✔ Inviato con successo
-        </div>
+        <div id="success" style="display:none;color:green;margin-top:10px;">✔ Inviato con successo</div>
       </div>
     </div>
   </div>
@@ -444,9 +443,7 @@ button{
   <div class="modal-content">
     <button class="close" onclick="closeModal()">×</button>
     <div class="grid">
-      <div class="img">
-        <img src="img/mexico.png" alt="Viaggio di nozze">
-      </div>
+      <div class="img"><img src="img/mexico.png" alt="Viaggio di nozze"></div>
       <div>
         <div class="eyebrow">Regalo</div>
         <h2 class="title">Viaggio di nozze</h2>
@@ -458,38 +455,41 @@ button{
 </div>
 
 <script>
-const track = document.getElementById("track");
-const dots  = document.querySelectorAll(".dot");
+const track  = document.getElementById("track");
+const dots   = document.querySelectorAll(".dot");
 const header = document.getElementById("header");
+
+/* AUTO-SCROLL dopo 5s se l'utente non ha interagito */
+let userScrolled = false;
+track.addEventListener("scroll", () => { userScrolled = true; }, { once: true });
+
+setTimeout(() => {
+  if (!userScrolled) {
+    track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
+  }
+}, 5000);
 
 function openModal(id){
   document.getElementById("modal-"+id).classList.add("open");
-  document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal(){
-  document.querySelectorAll(".modal").forEach(m=>m.classList.remove("open"));
-  document.body.style.overflow="";
+  document.querySelectorAll(".modal").forEach(m => m.classList.remove("open"));
+  document.body.style.overflow = "";
 }
 
-document.querySelectorAll(".modal").forEach(m=>{
-  m.addEventListener("click",e=>{ if(e.target===m) closeModal(); });
+document.querySelectorAll(".modal").forEach(m => {
+  m.addEventListener("click", e => { if(e.target === m) closeModal(); });
 });
 
-/* DOT SYNC + HEADER VISIBILITY */
-track.addEventListener("scroll",()=>{
+/* DOT SYNC + HEADER */
+track.addEventListener("scroll", () => {
   const index = Math.round(track.scrollLeft / window.innerWidth);
-  dots.forEach((d,i)=>d.classList.toggle("active",i===index));
-
-  /* nascondi header sulla slide 0, mostralo sulle altre */
-  if(index === 0){
-    header.classList.add("hidden");
-  } else {
-    header.classList.remove("hidden");
-  }
+  dots.forEach((d,i) => d.classList.toggle("active", i === index));
+  header.classList.toggle("hidden", index === 0);
 });
 
-/* header nascosto all'avvio (siamo sulla slide 0) */
 header.classList.add("hidden");
 
 /* RSVP */
@@ -509,15 +509,13 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   btn.innerText = "Invio...";
   try {
     await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
-      method: "POST",
-      mode: "no-cors",
-      body: payload
+      method: "POST", mode: "no-cors", body: payload
     });
     form.reset();
     form.style.display = "none";
     document.getElementById("success").style.display = "block";
-  } catch (err) {
-    console.error("Errore fetch:", err);
+  } catch(err) {
+    console.error(err);
     alert("Errore invio RSVP");
     btn.disabled = false;
     btn.innerText = "Invia";
