@@ -55,6 +55,25 @@ h1 em{color:#c4583a;}
   -webkit-overflow-scrolling:touch;
 }
 
+  /* INTRO */
+.intro-card{
+  cursor:default;
+}
+
+/* FRECCIA */
+.arrow{
+  font-size:2rem;
+  color:#c4583a;
+  opacity:0.6;
+  animation:arrowMove 1.5s infinite;
+}
+
+@keyframes arrowMove{
+  0%{transform:translateX(0);}
+  50%{transform:translateX(12px);}
+  100%{transform:translateX(0);}
+}
+
 .track::-webkit-scrollbar{display:none;}
 
 .slide{
@@ -241,6 +260,14 @@ button{
 <div class="wrapper">
   <div class="track" id="track">
 
+     <!-- INTRO (NUOVA) -->
+    <div class="slide intro">
+      <div class="card intro-card">
+        <img src="img/partecipazione.jpg">
+      </div>
+      <div class="arrow">→</div>
+    </div>
+    
     <div class="slide">
       <div class="card" onclick="openModal('location')">
         <img src="img/polaroid_location.jpeg">
@@ -268,6 +295,7 @@ button{
 <!-- DOTS -->
 <div class="dots">
   <div class="dot active"></div>
+  <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
 </div>
