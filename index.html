@@ -72,22 +72,22 @@ h1 em{color:#c4583a;}
 .card{
   width:80vw;
   max-width:380px;
-  height:60vh;
   border:14px solid #fff;
   border-bottom:55px solid #fff;
   background:#fff;
-  overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.15);
-  cursor:pointer;
-  transition:.3s;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .card:hover{transform:scale(1.03);}
 
-.card img{.card img{
+.card img{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;
+  max-height:55vh;
+  object-fit:contain;
 }
 
 .label{
