@@ -476,7 +476,7 @@ button[type="submit"]{
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <div class="card-img-wrap">
-          <img src="img/viaggio.jpg" alt="Viaggio">
+          <img src="img/viaggio.jpg" alt="Regalo">
           <div class="card-overlay">
             <div class="card-overlay-icon">
               <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -487,7 +487,7 @@ button[type="submit"]{
             <span class="card-overlay-text">Apri</span>
           </div>
         </div>
-        <div class="card-label">Il nostro Viaggio</div>
+        <div class="card-label">Regalo</div>
       </div>
       <div class="slide-caption">La vostra presenza è il regalo più bello.<br>Ma se volete aggiungerci un sogno…</div>
     </div>
@@ -513,7 +513,29 @@ button[type="submit"]{
         <div class="eyebrow">Location</div>
         <h2 class="title">Ca di Voi</h2>
         <div class="rule"></div>
-        <div class="text">Agriturismo immerso nella natura.</div>
+        <div class="text" style="margin-bottom:1rem;">
+          Un agriturismo immerso tra le colline liguri, dove il tempo sembra fermarsi.
+          Spazi verdi, aria buona e un'atmosfera calda e raccolta — il posto perfetto per festeggiare insieme.
+        </div>
+        <div class="text" style="margin-bottom:.4rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Indirizzo</div>
+        <div class="text" style="margin-bottom:1rem;">
+          Località Ca di Voi<br>
+          Savona, Liguria
+        </div>
+        <a href="https://maps.app.goo.gl/U52Jkqa8zKiDgAdv7"
+           target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;background:#c4583a;color:#fff;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+          </svg>
+          Apri in Maps
+        </a>
+        <div class="text" style="margin-bottom:.4rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Programma</div>
+        <div class="text" style="line-height:2;">
+          🕓 &nbsp;Cerimonia — ore 11:00<br>
+          🥂 &nbsp;Aperitivo — ore 12:00<br>
+          🍽️ &nbsp;Pranzo — ore 13:00
+        </div>
       </div>
     </div>
   </div>
@@ -530,16 +552,17 @@ button[type="submit"]{
         <h2 class="title">Conferma presenza</h2>
         <div class="rule"></div>
         <form id="rsvpForm">
-          <input name="name" placeholder="Nome e Cognome" required>
-          <select name="attendance">
-            <option value="">Sarai dei nostri?</option>
+          <input name="name" placeholder="Nome e Cognome *" required>
+          <select name="attendance" required>
+            <option value="">Parteciperai? *</option>
             <option>Sì</option>
             <option>No</option>
           </select>
-          <input name="allergies" placeholder="Hai qualche allergia alimentare da segnalarci?">
-          <input name="song" placeholder="Scrivici la canzone che vorresti ballare insieme a noi!">
-          <input name="email" placeholder="Inserisci qui la mail per i futuri aggiornamenti!">
-          <textarea name="questions" placeholder="Se hai qualsiasi domanda, scrivicelo qui!"></textarea>
+          <input name="email" type="email" placeholder="Email *" required>
+          <input name="song" placeholder="Canzone che vorresti ballare con noi *" required>
+          <input name="allergies" placeholder="Allergie alimentari?">
+          <input name="car" placeholder="Sei munito di macchina e avresti un posto per qualcuno?">
+          <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
           <button type="submit">Invia</button>
         </form>
         <div id="success" style="display:none;color:green;margin-top:10px;">✔ Inviato con successo</div>
@@ -555,10 +578,10 @@ button[type="submit"]{
     <div class="grid">
       <div class="img"><img src="img/mexico.png" alt="Viaggio di nozze"></div>
       <div>
-        <div class="eyebrow">Vi raccontiamo</div>
-        <h2 class="title">Il nostro Viaggio in 3</h2>
+        <div class="eyebrow">Regalo</div>
+        <h2 class="title">Viaggio di nozze</h2>
         <div class="rule"></div>
-        <div class="text">IBAN: IT60 X054 JK ECC</div>
+        <div class="text">IBAN: IT60 X054 ...</div>
       </div>
     </div>
   </div>
@@ -656,9 +679,10 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   const payload = new URLSearchParams({
     name: form.name.value,
     attendance: form.attendance.value,
-    allergies: form.allergies.value,
-    song: form.song.value,
     email: form.email.value,
+    song: form.song.value,
+    allergies: form.allergies.value,
+    car: form.car.value,
     questions: form.questions.value
   });
   const btn = form.querySelector("button");
