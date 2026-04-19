@@ -532,14 +532,14 @@ button[type="submit"]{
         <form id="rsvpForm">
           <input name="name" placeholder="Nome e Cognome" required>
           <select name="attendance">
-            <option value="">Parteciperai?</option>
+            <option value="">Sarai dei nostri?</option>
             <option>Sì</option>
             <option>No</option>
           </select>
           <input name="allergies" placeholder="Hai qualche allergia alimentare da segnalarci?">
           <input name="song" placeholder="Scrivici la canzone che vorresti ballare insieme a noi!">
-          <input name="car" placeholder="Sei munito di macchina e avresti un posto per qualcuno?">
-          <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
+          <input name="email" placeholder="Inserisci qui la mail per i futuri aggiornamenti!">
+          <textarea name="questions" placeholder="Se hai qualsiasi domanda, scrivicelo qui!"></textarea>
           <button type="submit">Invia</button>
         </form>
         <div id="success" style="display:none;color:green;margin-top:10px;">✔ Inviato con successo</div>
@@ -658,7 +658,7 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     attendance: form.attendance.value,
     allergies: form.allergies.value,
     song: form.song.value,
-    car: form.car.value,
+    email: form.email.value,
     questions: form.questions.value
   });
   const btn = form.querySelector("button");
