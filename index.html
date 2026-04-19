@@ -561,7 +561,6 @@ button[type="submit"]{
           <input name="email" type="email" placeholder="Email *" required>
           <input name="song" placeholder="Canzone che vorresti ballare con noi *" required>
           <input name="allergies" placeholder="Allergie alimentari?">
-          <input name="car" placeholder="Sei munito di macchina e avresti un posto per qualcuno?">
           <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
           <button type="submit">Invia</button>
         </form>
@@ -600,7 +599,7 @@ setTimeout(() => {
   if (!userScrolled) {
     track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
   }
-}, 5000);
+}, 3000);
 
 function openModal(id){
   document.getElementById("modal-"+id).classList.add("open");
@@ -682,7 +681,6 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     email: form.email.value,
     song: form.song.value,
     allergies: form.allergies.value,
-    car: form.car.value,
     questions: form.questions.value
   });
   const btn = form.querySelector("button");
