@@ -441,8 +441,12 @@ button[type="submit"]{
       <div class="slide-caption">Averti con noi quel giorno sarà già un regalo bellissimo<br>ma, se ti interessa, ti diciamo anche che…</div>
     </div>
 
-    <div class="slide intro">
+    <div class="slide intro" id="slide-final">
       <img class="intro-bg" src="img/Ci sposiamo!.png" alt="Vi aspettiamo">
+      <a href="https://www.instagram.com/simi___ph/" target="_blank"
+         style="position:absolute;bottom:20px;right:16px;z-index:5;font-family:'Jost',sans-serif;font-size:.55rem;letter-spacing:.15em;color:#fff;text-decoration:none;opacity:.75;text-shadow:0 1px 4px rgba(0,0,0,.5);text-transform:uppercase;">
+        foto di Simone Brunzu
+      </a>
     </div>
 
   </div>
@@ -627,8 +631,9 @@ document.querySelectorAll(".modal").forEach(m => {
 
 track.addEventListener("scroll", () => {
   const index = Math.round(track.scrollLeft / window.innerWidth);
+  const total = dots.length;
   dots.forEach((d,i) => d.classList.toggle("active", i === index));
-  header.classList.toggle("hidden", index === 0);
+  header.classList.toggle("hidden", index === 0 || index === total - 1);
 });
 
 header.classList.add("hidden");
