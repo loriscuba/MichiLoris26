@@ -618,12 +618,18 @@ setTimeout(() => {
   if (!userScrolled) track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
 }, 3000);
 
+let savedScroll = 0;
+
 function openModal(id){
+  savedScroll = track.scrollLeft;
   document.getElementById("modal-"+id).classList.add("open");
 }
 
 function closeModal(){
   document.querySelectorAll(".modal").forEach(m => m.classList.remove("open"));
+  requestAnimationFrame(() => {
+    track.scrollLeft = savedScroll;
+  });
 }
 
 document.querySelectorAll(".modal").forEach(m => {
@@ -684,6 +690,7 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     form.reset();
     form.style.display = "none";
     document.getElementById("success").style.display = "block";
+    setTimeout(() => closeModal(), 1500);
   } catch(err) {
     console.error(err);
     alert("Errore invio RSVP");
