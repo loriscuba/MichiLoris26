@@ -441,7 +441,7 @@ button[type="submit"]{
         </div>
         <div class="card-label">Un Pezzo in Più</div>
       </div>
-      <div class="slide-caption">Averti con noi quel giorno sarà già un regalo bellissimo ma ti diciamo anche che…</div>
+      <div class="slide-caption">Averti con noi quel giorno sarà già un regalo bellissimo<br>ma ti diciamo anche che…</div>
     </div>
 
     <div class="slide intro" id="slide-final">
@@ -620,12 +620,10 @@ setTimeout(() => {
 
 function openModal(id){
   document.getElementById("modal-"+id).classList.add("open");
-  document.body.style.overflow = "hidden";
 }
 
 function closeModal(){
   document.querySelectorAll(".modal").forEach(m => m.classList.remove("open"));
-  document.body.style.overflow = "";
 }
 
 document.querySelectorAll(".modal").forEach(m => {
@@ -686,7 +684,6 @@ document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
     form.reset();
     form.style.display = "none";
     document.getElementById("success").style.display = "block";
-    setTimeout(() => closeModal(), 1000);
   } catch(err) {
     console.error(err);
     alert("Errore invio RSVP");
