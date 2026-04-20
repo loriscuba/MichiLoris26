@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Michela & Loris — 29 Agosto 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Jost:wght@300;400&family=Anton&family=Anton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Jost:wght@300;400&family=Anton&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -17,7 +17,6 @@ body{
   color:#1a1a1a;
 }
 
-/* HEADER */
 header{
   position:fixed;
   top:0;
@@ -52,7 +51,6 @@ h1 em{color:#c4583a;}
   opacity:.6;
 }
 
-/* CAROUSEL */
 .wrapper{height:100vh;}
 
 .track{
@@ -77,7 +75,6 @@ h1 em{color:#c4583a;}
   gap:.6rem;
 }
 
-/* INTRO SLIDE */
 .slide.intro{
   position:relative;
   padding:0;
@@ -95,7 +92,6 @@ h1 em{color:#c4583a;}
   display:block;
 }
 
-/* FRECCIA rossa spessa */
 .intro-arrow{
   position:absolute;
   bottom:34px;
@@ -116,9 +112,7 @@ h1 em{color:#c4583a;}
   text-shadow:0 1px 4px rgba(0,0,0,.5);
 }
 
-.arrow-icon{
-  animation:arrowMove 1.5s infinite;
-}
+.arrow-icon{animation:arrowMove 1.5s infinite;}
 
 .arrow-icon svg{
   width:40px;
@@ -132,7 +126,6 @@ h1 em{color:#c4583a;}
   100%{transform:translateX(0);}
 }
 
-/* POLAROID più grande */
 .card{
   width:88vw;
   max-width:420px;
@@ -144,6 +137,7 @@ h1 em{color:#c4583a;}
   transition:transform .2s;
   box-shadow:0 4px 22px rgba(0,0,0,.13);
   padding:14px 14px 0 14px;
+  animation:pulse 2s ease 2s 2;
 }
 
 .card:active{transform:scale(0.97);}
@@ -156,7 +150,6 @@ h1 em{color:#c4583a;}
   display:block;
 }
 
-/* LABEL nella banda bianca sotto la foto */
 .card-label{
   width:100%;
   height:58px;
@@ -170,7 +163,6 @@ h1 em{color:#c4583a;}
   flex-shrink:0;
 }
 
-/* OVERLAY tap-to-open */
 .card-img-wrap{
   position:relative;
   width:100%;
@@ -203,10 +195,7 @@ h1 em{color:#c4583a;}
   opacity:0;
 }
 
-.card-overlay-icon svg{
-  width:28px;
-  height:28px;
-}
+.card-overlay-icon svg{width:28px;height:28px;}
 
 .card-overlay-text{
   font-family:'Jost',sans-serif;
@@ -218,47 +207,23 @@ h1 em{color:#c4583a;}
   text-transform:uppercase;
 }
 
-/* hover desktop */
-.card:hover .card-overlay{
-  background:rgba(196,88,58,0.45);
-}
-.card:hover .card-overlay-icon{
-  opacity:1;
-  transform:scale(1);
-  border-color:rgba(255,255,255,0.8);
-}
-.card:hover .card-overlay-text{
-  opacity:1;
-}
+.card:hover .card-overlay{background:rgba(196,88,58,0.45);}
+.card:hover .card-overlay-icon{opacity:1;transform:scale(1);border-color:rgba(255,255,255,0.8);}
+.card:hover .card-overlay-text{opacity:1;}
 
-/* active (mobile touch) */
 .card:active .card-overlay,
-.card.touched .card-overlay{
-  background:rgba(196,88,58,0.45);
-}
+.card.touched .card-overlay{background:rgba(196,88,58,0.45);}
 .card:active .card-overlay-icon,
-.card.touched .card-overlay-icon{
-  opacity:1;
-  transform:scale(1);
-  border-color:rgba(255,255,255,0.8);
-}
+.card.touched .card-overlay-icon{opacity:1;transform:scale(1);border-color:rgba(255,255,255,0.8);}
 .card:active .card-overlay-text,
-.card.touched .card-overlay-text{
-  opacity:1;
-}
+.card.touched .card-overlay-text{opacity:1;}
 
-/* pulse iniziale per suggerire l'interazione */
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(196,88,58,0.4);}
   70%{box-shadow:0 0 0 14px rgba(196,88,58,0);}
   100%{box-shadow:0 0 0 0 rgba(196,88,58,0);}
 }
 
-.card{
-  animation:pulse 2s ease 2s 2;
-}
-
-/* CAPTION sotto la card */
 .slide-caption{
   font-family:'Cormorant',serif;
   font-size:1rem;
@@ -271,7 +236,6 @@ h1 em{color:#c4583a;}
   font-style:italic;
 }
 
-/* DOTS */
 .dots{
   position:fixed;
   bottom:18px;
@@ -297,7 +261,6 @@ h1 em{color:#c4583a;}
   transform:scale(1.25);
 }
 
-/* MODAL */
 .modal{
   position:fixed;
   inset:0;
@@ -331,11 +294,8 @@ h1 em{color:#c4583a;}
   transition:.3s ease;
 }
 
-.modal.open .modal-content{
-  transform:scale(1);
-}
+.modal.open .modal-content{transform:scale(1);}
 
-/* X rossa più grande */
 .close{
   position:sticky;
   top:0;
@@ -351,7 +311,6 @@ h1 em{color:#c4583a;}
   margin-bottom:-2rem;
 }
 
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -359,16 +318,9 @@ h1 em{color:#c4583a;}
   align-items:center;
 }
 
-.img img{
-  width:100%;
-  border-radius:12px;
-}
+.img img{width:100%;border-radius:12px;}
 
-.eyebrow{
-  font-size:.6rem;
-  letter-spacing:.3em;
-  color:#c4583a;
-}
+.eyebrow{font-size:.6rem;letter-spacing:.3em;color:#c4583a;}
 
 .title{
   font-family:'Cormorant',serif;
@@ -383,12 +335,8 @@ h1 em{color:#c4583a;}
   margin-bottom:1rem;
 }
 
-.text{
-  font-size:.9rem;
-  line-height:1.6;
-}
+.text{font-size:.9rem;line-height:1.6;}
 
-/* FORM */
 input,select,textarea{
   width:100%;
   padding:10px;
@@ -422,7 +370,6 @@ button[type="submit"]{
 <div class="wrapper">
   <div class="track" id="track">
 
-    <!-- SLIDE 1: INTRO full screen -->
     <div class="slide intro">
       <img class="intro-bg" src="img/partecipazione.jpg" alt="Michela e Loris">
       <div class="intro-arrow">
@@ -436,7 +383,6 @@ button[type="submit"]{
       </div>
     </div>
 
-    <!-- SLIDE 2: Location -->
     <div class="slide">
       <div class="card" onclick="openModal('location')">
         <div class="card-img-wrap">
@@ -456,7 +402,6 @@ button[type="submit"]{
       <div class="slide-caption">Una giornata speciale da festeggiare<br>insieme alle nostre persone speciali</div>
     </div>
 
-    <!-- SLIDE 3: RSVP -->
     <div class="slide">
       <div class="card" onclick="openModal('rsvp')">
         <div class="card-img-wrap">
@@ -473,11 +418,9 @@ button[type="submit"]{
         </div>
         <div class="card-label">RSVP</div>
       </div>
-      <div class="slide-caption">Sarai con noi quel giorno? <br> Sperando in un tuo SI - convinto quanto il nostro - <br>
-        ti chiediamo di rispondere a qualche veloce domanda!</div>
+      <div class="slide-caption">Sarai con noi quel giorno?<br>Sperando in un tuo SI - convinto quanto il nostro -<br>ti chiediamo di rispondere a qualche veloce domanda!</div>
     </div>
 
-    <!-- SLIDE 4: Regalo -->
     <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <div class="card-img-wrap">
@@ -494,14 +437,12 @@ button[type="submit"]{
         </div>
         <div class="card-label">Un Pezzo in Più</div>
       </div>
-      <div class="slide-caption"> Averti con noi quel giorno sarà già un regalo bellissimo <br> ma, se ti interessa, ti diciamo anche che....
-</div>
+      <div class="slide-caption">Averti con noi quel giorno sarà già un regalo bellissimo<br>ma, se ti interessa, ti diciamo anche che…</div>
     </div>
 
   </div>
 </div>
 
-<!-- DOTS -->
 <div class="dots">
   <div class="dot active"></div>
   <div class="dot"></div>
@@ -520,8 +461,8 @@ button[type="submit"]{
         <h2 class="title">Ca di Voi</h2>
         <div class="rule"></div>
         <div class="text" style="margin-bottom:1rem;">
-          Ca' di Voi è il piccolo agriturismo che abbiamo scelto per festeggiare la nostra unione. 
-          È immerso nel verde dell'entroterra ligure, nel silenzio e nella freschezza della natura estiva. 
+          Ca' di Voi è il piccolo agriturismo che abbiamo scelto per festeggiare la nostra unione.
+          È immerso nel verde dell'entroterra ligure, nel silenzio e nella freschezza della natura estiva.
           Un posto magico dove trascorrere la giornata insieme e festeggiare!
         </div>
         <div class="text" style="margin-bottom:.4rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Indirizzo</div>
@@ -532,40 +473,75 @@ button[type="submit"]{
         <a href="https://maps.app.goo.gl/U52Jkqa8zKiDgAdv7"
            target="_blank"
            style="display:inline-flex;align-items:center;gap:8px;background:#c4583a;color:#fff;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
           </svg>
           Apri in Maps
         </a>
-        <div class="text" style="margin-bottom:.4rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Programma</div>
-        <div class="text" style="line-height:2;">
+        <div class="text" style="margin-bottom:.6rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Programma</div>
+        <div class="text" style="line-height:2.2;">
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L8 6H4v4l-2 2 2 2v4h4l4 4 4-4h4v-4l2-2-2-2V6h-4L12 2z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.5" stroke="#c4583a" stroke-width="1.5"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l1.5 3h3l-2.5 2 1 3L12 9.5 9 11l1-3L7.5 6h3L12 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M12 13v8M8 21h8" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
             Cerimonia — ore 11:00
           </span><br>
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3c0 4 4 5 4 9" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3c0 4 4 5 4 9" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M16 3c0 4-4 5-4 9" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M6 21h12M7 12h10l-1 9H8l-1-9z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h10l-3 8H10L7 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M10 11l-1 6M14 11l1 6M8 17h8" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="17" cy="5" r="1" fill="#c4583a"/>
+              <circle cx="15.2" cy="3.5" r=".7" fill="#c4583a"/>
+              <circle cx="18.5" cy="3.5" r=".7" fill="#c4583a"/>
+            </svg>
             Aperitivo — ore 12:00
           </span><br>
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11c0-4 2-8 9-8s9 4 9 8H3z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 11h20M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2M9 15h6" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M3 9a9 9 0 0118 0H3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M2 9h20M12 3v2" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M5 9v5a1 1 0 001 1h12a1 1 0 001-1V9" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M9 16v2M15 16v2M7 18h10" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
             Pranzo — ore 13:00
-          </span>
           </span><br>
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11c0-4 2-8 9-8s9 4 9 8H3z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 11h20M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2M9 15h6" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Dj set 15.00
-          </span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#c4583a" stroke-width="1.4"/>
+              <circle cx="12" cy="12" r="3.5" stroke="#c4583a" stroke-width="1.4"/>
+              <circle cx="12" cy="12" r="1" fill="#c4583a"/>
+              <path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            DJ set — ore 15:00
           </span><br>
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11c0-4 2-8 9-8s9 4 9 8H3z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 11h20M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2M9 15h6" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Taglio torta 17.00
-          </span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v3" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M10 2c0 1.1.9 2 2 2s2-.9 2-2" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M8 9v-2a4 4 0 018 0v2" stroke="#c4583a" stroke-width="1.4"/>
+              <rect x="4" y="9" width="16" height="4" rx="1" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M5 13v6a1 1 0 001 1h12a1 1 0 001-1v-6" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M9 17h6" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Taglio torta — ore 17:00
           </span><br>
+
           <span style="display:inline-flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11c0-4 2-8 9-8s9 4 9 8H3z" stroke="#c4583a" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 11h20M5 11v8a1 1 0 001 1h12a1 1 0 001-1v-8" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/><path d="M12 3v2M9 15h6" stroke="#c4583a" stroke-width="1.5" stroke-linecap="round"/></svg>
-            Il bicchiere della staffa 18.00
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M8 3h8l1 6H7L8 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M7 9c0 2.8 2.2 5 5 5s5-2.2 5-5" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M12 14v4M9 18h6" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M16 5.5h2a1 1 0 011 1v1.5a1 1 0 01-1 1h-1.5" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Il bicchiere della staffa — ore 18:00
           </span>
+
         </div>
       </div>
     </div>
@@ -611,7 +587,7 @@ button[type="submit"]{
         <div class="eyebrow">Vi raccontiamo</div>
         <h2 class="title">il nostro Viaggio in 3</h2>
         <div class="rule"></div>
-        <div class="text">Abbiamo in mente di fare un bel viaggio insieme a Umberto. Siamo sinceri, non abbiamo ancora scelto la meta - stiamo valutando diverse opzioni - ma sarà nostra premura tenerti aggiornato/a appena tutto diventerà più concreto! Al momento, con la mente, stiamo iniziando a volare lontano! 
+        <div class="text">Abbiamo in mente di fare un bel viaggio insieme a Umberto. Siamo sinceri, non abbiamo ancora scelto la meta - stiamo valutando diverse opzioni - ma sarà nostra premura tenerti aggiornato/a appena tutto diventerà più concreto! Al momento, con la mente, stiamo iniziando a volare lontano!
 Se hai voglia di aiutarci ecco qui:</div>
       </div>
     </div>
@@ -623,14 +599,10 @@ const track  = document.getElementById("track");
 const dots   = document.querySelectorAll(".dot");
 const header = document.getElementById("header");
 
-/* AUTO-SCROLL dopo 5s se l'utente non ha interagito */
 let userScrolled = false;
 track.addEventListener("scroll", () => { userScrolled = true; }, { once: true });
-
 setTimeout(() => {
-  if (!userScrolled) {
-    track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
-  }
+  if (!userScrolled) track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
 }, 3000);
 
 function openModal(id){
@@ -647,7 +619,6 @@ document.querySelectorAll(".modal").forEach(m => {
   m.addEventListener("click", e => { if(e.target === m) closeModal(); });
 });
 
-/* DOT SYNC + HEADER */
 track.addEventListener("scroll", () => {
   const index = Math.round(track.scrollLeft / window.innerWidth);
   dots.forEach((d,i) => d.classList.toggle("active", i === index));
@@ -656,54 +627,30 @@ track.addEventListener("scroll", () => {
 
 header.classList.add("hidden");
 
-/* OVERLAY MOBILE — mostra brevemente l'overlay su ogni card per suggerire il tap */
 function hintCard(card) {
   card.classList.add("touched");
   setTimeout(() => card.classList.remove("touched"), 900);
 }
 
-// Su mobile touchstart mostra overlay + apre modal al touchend
 document.querySelectorAll(".card").forEach(card => {
-  let touchMoved = false;
-
-  card.addEventListener("touchstart", () => {
-    touchMoved = false;
-    card.classList.add("touched");
-  }, { passive: true });
-
-  card.addEventListener("touchmove", () => {
-    touchMoved = true;
-    card.classList.remove("touched");
-  }, { passive: true });
-
-  card.addEventListener("touchend", () => {
-    card.classList.remove("touched");
-  }, { passive: true });
+  card.addEventListener("touchstart", () => { card.classList.add("touched"); }, { passive: true });
+  card.addEventListener("touchmove",  () => { card.classList.remove("touched"); }, { passive: true });
+  card.addEventListener("touchend",   () => { card.classList.remove("touched"); }, { passive: true });
 });
 
-// Hint automatico: fa lampeggiare le card in sequenza dopo 2.5s
 setTimeout(() => {
   const cards = document.querySelectorAll(".card");
-  cards.forEach((card, i) => {
-    // Lampeggia solo la card visibile (slide attiva)
-    if (i === 0) {
-      // Prima card = slide 2, lampeggia subito
-      hintCard(card);
-    }
-  });
+  if (cards[0]) hintCard(cards[0]);
 }, 2500);
 
-// Ri-lampeggia la card attiva ogni volta che l'utente arriva su una nuova slide
 track.addEventListener("scroll", () => {
   const index = Math.round(track.scrollLeft / window.innerWidth);
-  // index 0 = slide intro, index 1+ = card slides
   if (index >= 1) {
     const card = document.querySelectorAll(".card")[index - 1];
     if (card) setTimeout(() => hintCard(card), 400);
   }
 });
 
-/* RSVP */
 document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const form = e.target;
