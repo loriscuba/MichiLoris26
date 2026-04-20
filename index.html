@@ -626,11 +626,44 @@ const track  = document.getElementById("track");
 const dots   = document.querySelectorAll(".dot");
 const header = document.getElementById("header");
 
+// Blocca scroll finché le immagini non sono caricate
+track.style.pointerEvents = "none";
+track.style.overflow = "hidden";
+
+const allImages = document.querySelectorAll("img");
+let loaded = 0;
+const total = allImages.length;
+
+function onImageReady() {
+  loaded++;
+  if (loaded >= total) enableScroll();
+}
+
+// Timeout di sicurezza: sblocca dopo max 5 secondi
+const safetyTimer = setTimeout(enableScroll, 5000);
+
+function enableScroll() {
+  clearTimeout(safetyTimer);
+  track.style.overflow = "";
+  track.style.pointerEvents = "";
+  // Scroll automatico solo se l'utente non ha già scrollato
+  if (!userScrolled) {
+    setTimeout(() => {
+      if (!userScrolled) track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
+    }, 600);
+  }
+}
+
+allImages.forEach(img => {
+  if (img.complete) { onImageReady(); }
+  else {
+    img.addEventListener("load", onImageReady);
+    img.addEventListener("error", onImageReady); // sblocca anche in caso di errore
+  }
+});
+
 let userScrolled = false;
 track.addEventListener("scroll", () => { userScrolled = true; }, { once: true });
-setTimeout(() => {
-  if (!userScrolled) track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
-}, 3000);
 
 let savedScroll = 0;
 
