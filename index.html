@@ -374,6 +374,22 @@ button[type="submit"]{
 @media(max-width:768px){
   .grid{grid-template-columns:1fr;}
 }
+
+/* ── DESKTOP: immagini intro verticali mostrate intere e centrate ──
+   Su desktop (Safari/Firefox) l'immagine intro in layout flex prendeva
+   la sua altezza intrinseca e veniva tagliata da overflow:hidden.
+   Qui la conteniamo come già fa l'ultima slide. Il mobile non è toccato. */
+@media(min-width:769px){
+  .slide.intro .intro-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center center;
+    flex:none;
+  }
+}
 </style>
 </head>
 
