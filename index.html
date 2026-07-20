@@ -659,6 +659,7 @@ track.style.overflow = "hidden";
 const allImages = document.querySelectorAll("img");
 let loaded = 0;
 const total = allImages.length;
+let userScrolled = false;
 
 function onImageReady() {
   loaded++;
@@ -688,7 +689,6 @@ allImages.forEach(img => {
   }
 });
 
-let userScrolled = false;
 track.addEventListener("scroll", () => { userScrolled = true; }, { once: true });
 
 let savedScroll = 0;
