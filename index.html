@@ -162,7 +162,7 @@ h1 em{color:#c4583a;}
   width:100%;
   height:auto;
   max-height:calc(100svh - 200px);
-  object-fit:cover;
+  object-fit:contain;
   display:block;
 }
 
@@ -388,6 +388,16 @@ button[type="submit"]{
     object-fit:contain;
     object-position:center center;
     flex:none;
+  }
+}
+
+/* ── FINESTRE BASSE (desktop con finestra piccola o zoom): ancora la card
+   sotto l'header ed evita che le teste finiscano coperte/tagliate ──
+   Soglia 620px: i telefoni (>=667px) e il mobile verticale non sono toccati. */
+@media(max-height:620px){
+  .slide:not(.intro){
+    justify-content:flex-start;
+    padding-top:200px;
   }
 }
 </style>
