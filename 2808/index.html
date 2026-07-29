@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michela & Loris — 29 Agosto 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&family=Anton&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Jost',sans-serif;
+  background:#e8e0d0;
+  overflow:hidden;
+  overscroll-behavior:none;
+  color:#1a1a1a;
+}
+
+html{
+  overflow:hidden;
+  overscroll-behavior:none;
+  height:100%;
+}
+
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  text-align:center;
+  padding:.5rem 1rem;
+  z-index:10;
+  background:rgba(232,224,208,0.75);
+  backdrop-filter:blur(10px);
+  transition:opacity .4s ease,transform .4s ease;
+}
+
+header.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(-10px);
+}
+
+h1{
+  font-family:'Anton',sans-serif;
+  font-weight:400;
+  font-size:2.3rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+h1 em{color:#c4583a;}
+
+.subtitle{
+  font-size:.6rem;
+  letter-spacing:.3em;
+  opacity:.6;
+}
+
+.wrapper{height:100vh;}
+
+.track{
+  height:100%;
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+
+.track::-webkit-scrollbar{display:none;}
+
+.slide{
+  min-width:100%;
+  height:100%;
+  scroll-snap-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:.6rem;
+  padding-top:90px;
+  padding-bottom:40px;
+  box-sizing:border-box;
+}
+
+.slide.intro{
+  position:relative;
+  padding:0;
+  gap:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+}
+
+.intro-bg{
+  position:relative;
+  z-index:0;
+  width:100%;
+  flex:1 1 auto;
+  min-height:0;
+  object-fit:contain;
+  object-position:center top;
+  background:#e8e0d0;
+  display:block;
+}
+
+.intro-arrow{
+  position:absolute;
+  bottom:34px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  z-index:5;
+}
+
+.arrow-label{
+  font-size:.55rem;
+  letter-spacing:.25em;
+  color:#fff;
+  opacity:.85;
+  text-shadow:0 1px 4px rgba(0,0,0,.5);
+}
+
+.arrow-icon{animation:arrowMove 1.5s infinite;}
+
+.arrow-icon svg{
+  width:40px;
+  height:40px;
+  filter:drop-shadow(0 1px 5px rgba(0,0,0,.45));
+}
+
+@keyframes arrowMove{
+  0%{transform:translateX(0);}
+  50%{transform:translateX(14px);}
+  100%{transform:translateX(0);}
+}
+
+.card{
+  width:88vw;
+  max-width:420px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  cursor:pointer;
+  transition:transform .2s;
+  box-shadow:0 4px 22px rgba(0,0,0,.13);
+  padding:14px 14px 0 14px;
+  animation:pulse 2s ease 2s 2;
+}
+
+.card:active{transform:scale(0.97);}
+
+.card img{
+  width:100%;
+  height:auto;
+  max-height:calc(100svh - 200px);
+  object-fit:contain;
+  display:block;
+}
+
+.card-label{
+  width:100%;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cormorant',serif;
+  font-size:1.5rem;
+  color:#1a1a1a;
+  pointer-events:none;
+  flex-shrink:0;
+}
+
+.card-img-wrap{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+
+.card-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(196,88,58,0);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:background .3s ease;
+  pointer-events:none;
+}
+
+.card-overlay-icon{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s ease;
+  transform:scale(0.7);
+  opacity:0;
+}
+
+.card-overlay-icon svg{width:28px;height:28px;}
+
+.card-overlay-text{
+  font-family:'Jost',sans-serif;
+  font-size:.6rem;
+  letter-spacing:.25em;
+  color:#fff;
+  opacity:0;
+  transition:opacity .3s ease;
+  text-transform:uppercase;
+}
+
+.card:hover .card-overlay{background:rgba(196,88,58,0.45);}
+.card:hover .card-overlay-icon{opacity:1;transform:scale(1);border-color:rgba(255,255,255,0.8);}
+.card:hover .card-overlay-text{opacity:1;}
+
+.card:active .card-overlay,
+.card.touched .card-overlay{background:rgba(196,88,58,0.45);}
+.card:active .card-overlay-icon,
+.card.touched .card-overlay-icon{opacity:1;transform:scale(1);border-color:rgba(255,255,255,0.8);}
+.card:active .card-overlay-text,
+.card.touched .card-overlay-text{opacity:1;}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(196,88,58,0.4);}
+  70%{box-shadow:0 0 0 14px rgba(196,88,58,0);}
+  100%{box-shadow:0 0 0 0 rgba(196,88,58,0);}
+}
+
+/* ── TESTO SOTTO LE CARD ── */
+.slide-caption{
+  font-family:'Cormorant',serif;
+  font-size:1.15rem;
+  font-weight:500;
+  font-style:italic;
+  line-height:1.65;
+  text-align:center;
+  color:#4a3f35;
+  padding:0 2rem;
+  letter-spacing:.01em;
+}
+
+.dots{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  z-index:50;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#b8b0a4;
+  opacity:.4;
+  transition:.25s;
+}
+
+.dot.active{
+  opacity:1;
+  background:#c4583a;
+  transform:scale(1.25);
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.6);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:.3s ease;
+  z-index:999;
+}
+
+.modal.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.modal-content{
+  width:92%;
+  max-width:900px;
+  max-height:88vh;
+  overflow-y:auto;
+  background:#f3eadc;
+  border-radius:18px;
+  padding:2.5rem 1.5rem 1.5rem;
+  position:relative;
+  transform:scale(.95);
+  transition:.3s ease;
+}
+
+.modal.open .modal-content{transform:scale(1);}
+
+.close{
+  position:sticky;
+  top:0;
+  float:right;
+  font-size:2.6rem;
+  line-height:1;
+  border:none;
+  background:none;
+  cursor:pointer;
+  color:#c4583a;
+  font-weight:300;
+  z-index:10;
+  margin-bottom:-2rem;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  align-items:center;
+}
+
+.img img{width:100%;border-radius:12px;}
+
+.eyebrow{font-size:.6rem;letter-spacing:.3em;color:#c4583a;}
+
+.title{
+  font-family:'Cormorant',serif;
+  font-size:2rem;
+  margin:.5rem 0;
+}
+
+.rule{
+  width:40px;
+  height:2px;
+  background:#c4583a;
+  margin-bottom:1rem;
+}
+
+.text{font-size:.9rem;line-height:1.6;}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border:1px solid #ddd;
+  border-radius:6px;
+}
+
+button[type="submit"]{
+  background:#c4583a;
+  color:#fff;
+  border:none;
+  padding:.8rem 1.2rem;
+  cursor:pointer;
+  letter-spacing:.2em;
+}
+
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+}
+
+/* ── DESKTOP: immagini intro verticali mostrate intere e centrate ──
+   Su desktop (Safari/Firefox) l'immagine intro in layout flex prendeva
+   la sua altezza intrinseca e veniva tagliata da overflow:hidden.
+   Qui la conteniamo come già fa l'ultima slide. Il mobile non è toccato. */
+@media(min-width:769px){
+  .slide.intro .intro-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center center;
+    flex:none;
+  }
+}
+
+/* ── FINESTRE BASSE (desktop con finestra piccola o zoom): ancora la card
+   sotto l'header ed evita che le teste finiscano coperte/tagliate ──
+   Soglia 620px: i telefoni (>=667px) e il mobile verticale non sono toccati. */
+@media(max-height:620px){
+  .slide:not(.intro){
+    justify-content:flex-start;
+    padding-top:200px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+  <img src="img/titolo_header.png" alt="Michela &amp; Loris — 29 Agosto 2026"
+       style="height:auto;width:60vw;max-width:320px;object-fit:contain;">
+</header>
+
+<div class="wrapper">
+  <div class="track" id="track">
+
+    <div class="slide intro">
+      <img class="intro-bg" src="img/partecipazione.jpg" alt="Michela e Loris">
+      <div class="intro-arrow">
+        <span class="arrow-label">scorri</span>
+        <div class="arrow-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 20 L34 20 M23 9 L34 20 L23 31"
+              stroke="#c4583a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="card" onclick="openModal('location')">
+        <div class="card-img-wrap">
+          <img src="img/location.jpg" alt="Location">
+          <div class="card-overlay">
+            <div class="card-overlay-icon">
+              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="13" stroke="white" stroke-width="1.5"/>
+                <path d="M10 14h8M15 10l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-overlay-text">Apri</span>
+          </div>
+        </div>
+        <div class="card-label">Location</div>
+      </div>
+      <div class="slide-caption">Una giornata speciale da festeggiare<br>insieme alle nostre persone speciali</div>
+    </div>
+
+    <div class="slide">
+      <div class="card" onclick="openModal('rsvp')">
+        <div class="card-img-wrap">
+          <img src="img/rsvp.jpg" alt="RSVP">
+          <div class="card-overlay">
+            <div class="card-overlay-icon">
+              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="13" stroke="white" stroke-width="1.5"/>
+                <path d="M10 14h8M15 10l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-overlay-text">Apri</span>
+          </div>
+        </div>
+        <div class="card-label">RSVP</div>
+      </div>
+      <div class="slide-caption">Sarai con noi quel giorno?<br>Sperando in un tuo SI, qualche domanda per te</div>
+    </div>
+
+    <div class="slide">
+      <div class="card" onclick="openModal('gift')">
+        <div class="card-img-wrap">
+          <img src="img/viaggio.jpg" alt="Regalo">
+          <div class="card-overlay">
+            <div class="card-overlay-icon">
+              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="14" r="13" stroke="white" stroke-width="1.5"/>
+                <path d="M10 14h8M15 10l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="card-overlay-text">Apri</span>
+          </div>
+        </div>
+        <div class="card-label">Il nostro Viaggio</div>
+      </div>
+      <div class="slide-caption">Averti con noi quel giorno sarà già<br>un regalo bellissimo ma ti diciamo anche che…</div>
+    </div>
+
+    <div class="slide intro" id="slide-final" style="overflow:hidden;">
+      <img class="intro-bg" src="img/Ci sposiamo!.png" alt="Vi aspettiamo"
+           style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;background:#e8e0d0;">
+      <a href="https://www.instagram.com/simi___ph/" target="_blank"
+         style="position:absolute;top:14px;right:14px;z-index:10;font-family:'Jost',sans-serif;font-size:.55rem;letter-spacing:.15em;color:#1a1a1a;text-decoration:none;opacity:.9;text-transform:uppercase;background:rgba(232,224,208,0.82);padding:4px 10px;border-radius:4px;">
+        foto di Simone Brunzu
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="dots">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<!-- MODAL: LOCATION -->
+<div id="modal-location" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="grid">
+      <div class="img"><img src="img/loc1.jpg" alt="Ca di Voi"></div>
+      <div>
+        <div class="eyebrow">Location</div>
+        <h2 class="title">Ca di Voi</h2>
+        <div class="rule"></div>
+        <div class="text" style="margin-bottom:1rem;">
+          Ca' di Voi è il piccolo agriturismo che abbiamo scelto per festeggiare la nostra unione.
+          È immerso nel verde dell'entroterra ligure, nel silenzio e nella freschezza della natura estiva.
+          Un posto magico dove trascorrere la giornata insieme e festeggiare!
+        </div>
+        <div class="text" style="margin-bottom:.4rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Indirizzo</div>
+        <div class="text" style="margin-bottom:1rem;">
+          Frazione Caragna, 17057 Calizzano SV<br>
+          Tel. <a href="tel:+393333568200" style="color:#c4583a;text-decoration:none;">333 356 8200</a>
+        </div>
+        <a href="https://maps.app.goo.gl/U52Jkqa8zKiDgAdv7"
+           target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;background:#c4583a;color:#fff;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.2rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+          </svg>
+          Apri in Maps
+        </a>
+        <div class="text" style="margin-bottom:.6rem;font-weight:500;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#c4583a;">Programma</div>
+        <div class="text" style="line-height:2.2;">
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l1.5 3h3l-2.5 2 1 3L12 9.5 9 11l1-3L7.5 6h3L12 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M12 13v8M8 21h8" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Cerimonia — ore 11:00
+          </span><br>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M7 3h10l-3 8H10L7 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M10 11l-1 6M14 11l1 6M8 17h8" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="17" cy="5" r="1" fill="#c4583a"/>
+              <circle cx="15.2" cy="3.5" r=".7" fill="#c4583a"/>
+              <circle cx="18.5" cy="3.5" r=".7" fill="#c4583a"/>
+            </svg>
+            Aperitivo — ore 12:00
+          </span><br>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M3 9a9 9 0 0118 0H3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M2 9h20M12 3v2" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M5 9v5a1 1 0 001 1h12a1 1 0 001-1V9" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M9 16v2M15 16v2M7 18h10" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Pranzo — ore 13:00
+          </span><br>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#c4583a" stroke-width="1.4"/>
+              <circle cx="12" cy="12" r="3.5" stroke="#c4583a" stroke-width="1.4"/>
+              <circle cx="12" cy="12" r="1" fill="#c4583a"/>
+              <path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            DJ set — ore 15:00
+          </span><br>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v3" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M10 2c0 1.1.9 2 2 2s2-.9 2-2" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M8 9v-2a4 4 0 018 0v2" stroke="#c4583a" stroke-width="1.4"/>
+              <rect x="4" y="9" width="16" height="4" rx="1" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M5 13v6a1 1 0 001 1h12a1 1 0 001-1v-6" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M9 17h6" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Taglio torta — ore 17:00
+          </span><br>
+
+          <span style="display:inline-flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M8 3h8l1 6H7L8 3z" stroke="#c4583a" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M7 9c0 2.8 2.2 5 5 5s5-2.2 5-5" stroke="#c4583a" stroke-width="1.4"/>
+              <path d="M12 14v4M9 18h6" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M16 5.5h2a1 1 0 011 1v1.5a1 1 0 01-1 1h-1.5" stroke="#c4583a" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            Il bicchiere della staffa — ore 18:00
+          </span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: RSVP -->
+<div id="modal-rsvp" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="grid">
+      <div class="img"><img src="img/rsvp2.jpg" alt="RSVP"></div>
+      <div>
+        <div class="eyebrow">RSVP</div>
+        <h2 class="title">Conferma presenza</h2>
+        <div class="rule"></div>
+        <form id="rsvpForm">
+          <input name="name" placeholder="Nome e Cognome *" required>
+          <select name="attendance" required>
+            <option value="">Parteciperai? *</option>
+            <option>Sì</option>
+            <option>No</option>
+          </select>
+          <input name="email" type="email" placeholder="Email *" required>
+          <input name="song" placeholder="Canzone che vorresti ballare con noi *" required>
+          <input name="allergies" placeholder="Allergie alimentari?">
+          <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
+          <button type="submit">Invia</button>
+        </form>
+        <div id="success" style="display:none;color:green;margin-top:10px;">✔ Inviato con successo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: GIFT -->
+<div id="modal-gift" class="modal">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="grid">
+      <div class="img"><img src="img/giappone.jpg" alt="Giappone - viaggio di nozze"></div>
+      <div>
+        <div class="eyebrow">Vi raccontiamo</div>
+        <h2 class="title">il nostro Viaggio in 3</h2>
+        <div class="rule"></div>
+        <div class="text">Abbiamo in mente di fare un bel viaggio insieme a Umberto. Alla fine il Messico è stato spodestato dal Giappone! Se vi facesse piacere conoscere l'itinerario e contribuire come regalo di nozze a questa nostra esperienza vi lasciamo il sito con le credenziali di accesso:<br><br><strong><a href="https://michelaeloriscubaiu.amoore.it" target="_blank" style="color:#c4583a;text-decoration:none;">michelaeloriscubaiu.amoore.it</a></strong><br>User: guest13619<br>Passw: 7818b6<br><br>Nel caso la tecnologia non fosse dalla vostra e abitate a Savona l'agenzia di riferimento è l'Agenzia Ziggurat — Piazza del Popolo, 22, 17100 Savona SV.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const track  = document.getElementById("track");
+const dots   = document.querySelectorAll(".dot");
+const header = document.getElementById("header");
+
+// Blocca scroll finché le immagini non sono caricate
+track.style.pointerEvents = "none";
+track.style.overflow = "hidden";
+
+const allImages = document.querySelectorAll("img");
+let loaded = 0;
+const total = allImages.length;
+let userScrolled = false;
+
+function onImageReady() {
+  loaded++;
+  if (loaded >= total) enableScroll();
+}
+
+// Timeout di sicurezza: sblocca dopo max 5 secondi
+const safetyTimer = setTimeout(enableScroll, 5000);
+
+function enableScroll() {
+  clearTimeout(safetyTimer);
+  track.style.overflow = "";
+  track.style.pointerEvents = "";
+  // Scroll automatico solo se l'utente non ha già scrollato
+  if (!userScrolled) {
+    setTimeout(() => {
+      if (!userScrolled) track.scrollTo({ left: window.innerWidth, behavior: "smooth" });
+    }, 600);
+  }
+}
+
+allImages.forEach(img => {
+  if (img.complete) { onImageReady(); }
+  else {
+    img.addEventListener("load", onImageReady);
+    img.addEventListener("error", onImageReady); // sblocca anche in caso di errore
+  }
+});
+
+track.addEventListener("scroll", () => { userScrolled = true; }, { once: true });
+
+let savedScroll = 0;
+
+function openModal(id){
+  savedScroll = track.scrollLeft;
+  document.getElementById("modal-"+id).classList.add("open");
+}
+
+function closeModal(){
+  document.querySelectorAll(".modal").forEach(m => m.classList.remove("open"));
+  requestAnimationFrame(() => {
+    track.scrollLeft = savedScroll;
+    requestAnimationFrame(() => { track.scrollLeft = savedScroll; });
+  });
+}
+
+document.querySelectorAll(".modal").forEach(m => {
+  m.addEventListener("click", e => { if(e.target === m) closeModal(); });
+});
+
+track.addEventListener("scroll", () => {
+  const index = Math.round(track.scrollLeft / window.innerWidth);
+  const total = dots.length;
+  dots.forEach((d,i) => d.classList.toggle("active", i === index));
+  header.classList.toggle("hidden", index === 0 || index === total - 1);
+});
+
+header.classList.add("hidden");
+
+function hintCard(card) {
+  card.classList.add("touched");
+  setTimeout(() => card.classList.remove("touched"), 900);
+}
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("touchstart", () => { card.classList.add("touched"); }, { passive: true });
+  card.addEventListener("touchmove",  () => { card.classList.remove("touched"); }, { passive: true });
+  card.addEventListener("touchend",   () => { card.classList.remove("touched"); }, { passive: true });
+});
+
+setTimeout(() => {
+  const cards = document.querySelectorAll(".card");
+  if (cards[0]) hintCard(cards[0]);
+}, 2500);
+
+track.addEventListener("scroll", () => {
+  const index = Math.round(track.scrollLeft / window.innerWidth);
+  if (index >= 1) {
+    const card = document.querySelectorAll(".card")[index - 1];
+    if (card) setTimeout(() => hintCard(card), 400);
+  }
+});
+
+document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const payload = new URLSearchParams({
+    name: form.name.value,
+    attendance: form.attendance.value,
+    email: form.email.value,
+    song: form.song.value,
+    allergies: form.allergies.value,
+    questions: form.questions.value
+  });
+  const btn = form.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "Invio...";
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
+      method: "POST", mode: "no-cors", body: payload
+    });
+    form.reset();
+    form.style.display = "none";
+    document.getElementById("success").style.display = "block";
+    setTimeout(() => closeModal(), 1500);
+  } catch(err) {
+    console.error(err);
+    alert("Errore invio RSVP");
+    btn.disabled = false;
+    btn.innerText = "Invia";
+  }
+});
+</script>
+
+</body>
+</html>
