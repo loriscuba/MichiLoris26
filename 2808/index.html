@@ -446,25 +446,6 @@ button[type="submit"]{
     </div>
 
     <div class="slide">
-      <div class="card" onclick="openModal('rsvp')">
-        <div class="card-img-wrap">
-          <img src="img/rsvp.jpg" alt="RSVP">
-          <div class="card-overlay">
-            <div class="card-overlay-icon">
-              <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="14" cy="14" r="13" stroke="white" stroke-width="1.5"/>
-                <path d="M10 14h8M15 10l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="card-overlay-text">Apri</span>
-          </div>
-        </div>
-        <div class="card-label">RSVP</div>
-      </div>
-      <div class="slide-caption">Sarai con noi quel giorno?<br>Sperando in un tuo SI, qualche domanda per te</div>
-    </div>
-
-    <div class="slide">
       <div class="card" onclick="openModal('gift')">
         <div class="card-img-wrap">
           <img src="img/viaggio.jpg" alt="Regalo">
@@ -497,7 +478,6 @@ button[type="submit"]{
 
 <div class="dots">
   <div class="dot active"></div>
-  <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
@@ -552,35 +532,6 @@ button[type="submit"]{
           </span>
 
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: RSVP -->
-<div id="modal-rsvp" class="modal">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <div class="grid">
-      <div class="img"><img src="img/rsvp2.jpg" alt="RSVP"></div>
-      <div>
-        <div class="eyebrow">RSVP</div>
-        <h2 class="title">Conferma presenza</h2>
-        <div class="rule"></div>
-        <form id="rsvpForm">
-          <input name="name" placeholder="Nome e Cognome *" required>
-          <select name="attendance" required>
-            <option value="">Parteciperai? *</option>
-            <option>Sì</option>
-            <option>No</option>
-          </select>
-          <input name="email" type="email" placeholder="Email *" required>
-          <input name="song" placeholder="Canzone che vorresti ballare con noi *" required>
-          <input name="allergies" placeholder="Allergie alimentari?">
-          <textarea name="questions" placeholder="Se hai qualsiasi domanda sull'evento, scrivicelo qui!"></textarea>
-          <button type="submit">Invia</button>
-        </form>
-        <div id="success" style="display:none;color:green;margin-top:10px;">✔ Inviato con successo</div>
       </div>
     </div>
   </div>
@@ -695,36 +646,6 @@ track.addEventListener("scroll", () => {
   if (index >= 1) {
     const card = document.querySelectorAll(".card")[index - 1];
     if (card) setTimeout(() => hintCard(card), 400);
-  }
-});
-
-document.getElementById("rsvpForm")?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const payload = new URLSearchParams({
-    name: form.name.value,
-    attendance: form.attendance.value,
-    email: form.email.value,
-    song: form.song.value,
-    allergies: form.allergies.value,
-    questions: form.questions.value
-  });
-  const btn = form.querySelector("button");
-  btn.disabled = true;
-  btn.innerText = "Invio...";
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbwAzCtl57Rxddw2Gk4knrbi1MTZpQIO4EuHvBJyazXRH3GXneTQyhHqkqyJyyJPSBma/exec", {
-      method: "POST", mode: "no-cors", body: payload
-    });
-    form.reset();
-    form.style.display = "none";
-    document.getElementById("success").style.display = "block";
-    setTimeout(() => closeModal(), 1500);
-  } catch(err) {
-    console.error(err);
-    alert("Errore invio RSVP");
-    btn.disabled = false;
-    btn.innerText = "Invia";
   }
 });
 </script>
